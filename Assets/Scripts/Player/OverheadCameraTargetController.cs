@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OverheadCameraTargetController : MonoBehaviour
@@ -9,9 +7,18 @@ public class OverheadCameraTargetController : MonoBehaviour
 
     private Vector3 velocity;
 
+    private Camera mainCamera;
+
     private void HandleCameraMove(object sender, Vector2 delta)
     {
-        velocity = transform.forward * delta.y + transform.right * delta.x;
+        Vector3 forward = Vector3.ProjectOnPlane(mainCamera.transform.forward, Vector3.up);
+        Vector3 right = Vector3.ProjectOnPlane(mainCamera.transform.right, Vector3.up);
+        velocity = forward * delta.y + right * delta.x;
+    }
+
+    private void Awake()
+    {
+        mainCamera = Camera.main;
     }
 
     private void OnEnable()
