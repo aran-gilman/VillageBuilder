@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputEvents : MonoBehaviour
+[CreateAssetMenu]
+public class InputEvents : ScriptableObject
 {
     [SerializeField]
     private InputActionAsset asset;
@@ -16,8 +17,28 @@ public class InputEvents : MonoBehaviour
     [SerializeField]
     private float cameraMoveSensitivity = 1.0f;
 
+    private InputActionMap playerActionMap;
     private InputAction rotateCameraAction;
     private InputAction moveCameraAction;
+
+    public void Enable()
+    {
+        playerActionMap.Enable();
+        rotateCameraAction.performed += OnRotateCamera;
+        rotateCameraAction.canceled += OnRotateCamera;
+
+        moveCameraAction.performed += OnMoveCamera;
+        moveCameraAction.canceled += OnMoveCamera;
+    }
+
+    public void Disable()
+    {
+        rotateCameraAction.performed -= OnRotateCamera;
+        rotateCameraAction.canceled -= OnRotateCamera;
+
+        moveCameraAction.performed -= OnMoveCamera;
+        moveCameraAction.canceled -= OnMoveCamera;
+    }
 
     private void OnRotateCamera(InputAction.CallbackContext ctx)
     {
@@ -32,29 +53,10 @@ public class InputEvents : MonoBehaviour
         moveCameraEvent.Raise(value * cameraMoveSensitivity);
     }
 
-    private void Awake()
-    {
-        InputActionMap playerActionMap = asset.FindActionMap("Player");
-        playerActionMap.Enable();
-        rotateCameraAction = playerActionMap.FindAction("Rotate");
-        moveCameraAction = playerActionMap.FindAction("Move");
-    }
-
     private void OnEnable()
     {
-        rotateCameraAction.performed += OnRotateCamera;
-        rotateCameraAction.canceled += OnRotateCamera;
-
-        moveCameraAction.performed += OnMoveCamera;
-        moveCameraAction.canceled += OnMoveCamera;
-    }
-
-    private void OnDisable()
-    {
-        rotateCameraAction.performed -= OnRotateCamera;
-        rotateCameraAction.canceled -= OnRotateCamera;
-
-        moveCameraAction.performed -= OnMoveCamera;
-        moveCameraAction.canceled -= OnMoveCamera;
+        playerActionMap = asset.FindActionMap("Player");
+        rotateCameraAction = playerActionMap.FindAction("Rotate");
+        moveCameraAction = playerActionMap.FindAction("Move");
     }
 }

@@ -1010,11 +1010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 058a53197a8986e4d8acc71017f212d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: {fileID: -944628639613478452, guid: 641a4e1210f44de41bb0b086b500a021, type: 3}
-  rotateCameraEvent: {fileID: 11400000, guid: e5a55016c4a46424da297eb8ac21198a, type: 2}
-  pitchCameraEvent: {fileID: 11400000, guid: 156d9a8c9c7168c4e880ec7c7d70859b, type: 2}
-  moveCameraEvent: {fileID: 11400000, guid: d43176de83f7c6140a7fe48b8bec9951, type: 2}
-  cameraMoveSensitivity: 10
+  inputEvents: {fileID: 11400000, guid: 635a4f08b15d91e459c552df8ad02d6a, type: 2}
 --- !u!1 &1908938681
 GameObject:
   m_ObjectHideFlags: 0
