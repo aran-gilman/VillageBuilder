@@ -9,11 +9,16 @@ public class OverheadCameraTargetController : MonoBehaviour
 
     private Camera mainCamera;
 
+    private Vector3 GetAbsoluteVelocity()
+    {
+        Vector3 forward = Vector3.ProjectOnPlane(mainCamera.transform.forward, Vector3.up).normalized;
+        Vector3 right = Vector3.ProjectOnPlane(mainCamera.transform.right, Vector3.up).normalized;
+        return forward * velocity.y + right * velocity.x;
+    }
+
     private void HandleCameraMove(object sender, Vector2 delta)
     {
-        Vector3 forward = Vector3.ProjectOnPlane(mainCamera.transform.forward, Vector3.up);
-        Vector3 right = Vector3.ProjectOnPlane(mainCamera.transform.right, Vector3.up);
-        velocity = forward * delta.y + right * delta.x;
+        velocity = delta;
     }
 
     private void Awake()
@@ -33,6 +38,6 @@ public class OverheadCameraTargetController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Translate(velocity * Time.fixedDeltaTime);
+        transform.Translate(GetAbsoluteVelocity() * Time.fixedDeltaTime);
     }
 }
