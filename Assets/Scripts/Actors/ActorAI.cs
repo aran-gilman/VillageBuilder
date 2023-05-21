@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,7 +14,9 @@ public class ActorAI : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         // For testing only
-        GameObject go = GameObject.Find("Bush");
-        commandRunner.AddCommand(new ApproachCommand(navMeshAgent, go.transform));
+        Inventory inventory = GetComponent<Inventory>();
+        RetrieveItemTarget target = FindObjectOfType<RetrieveItemTarget>();
+        commandRunner.AddCommand(new ApproachCommand(navMeshAgent, target.transform));
+        commandRunner.AddCommand(new RetrieveCommand(inventory, target.Inventory, target.Inventory.ItemStacks.First()));
     }
 }
