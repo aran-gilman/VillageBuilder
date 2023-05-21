@@ -11,7 +11,7 @@ public class OverheadCameraTargetController : MonoBehaviour
 
     private void HandleCameraMove(object sender, Vector2 delta)
     {
-        velocity = new Vector3(delta.x, 0, delta.y);
+        velocity = transform.forward * delta.y + transform.right * delta.x;
     }
 
     private void OnEnable()
