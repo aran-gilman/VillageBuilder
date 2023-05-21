@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Game Event/Void")]
+[CreateAssetMenu(menuName = "Game Events/Void")]
 public class VoidGameEvent : GameEvent<object>
 {
     public void Raise()
