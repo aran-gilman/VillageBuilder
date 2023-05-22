@@ -1,11 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField]
     private List<ItemStack> itemStacks;
     public IEnumerable<ItemStack> ItemStacks => itemStacks;
+
+    [SerializeField]
+    private UnityEvent onEmpty;
 
     public int Count(Item item)
     {
@@ -23,30 +27,30 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// Adds the specified items to the inventory
     /// </summary>
-    /// <param name="toAdd"></param>
     /// <returns>The actual number of items added</returns>
-    public int Add(ItemStack toAdd)
+    public int Add(Item item, int quantity)
     {
         itemStacks.Add(new ItemStack()
         {
-            Item = toAdd.Item,
-            Quantity = toAdd.Quantity
+            Item = item,
+            Quantity = quantity
         });
-        return toAdd.Quantity;
+        return quantity;
     }
+
+    public int Add(ItemStack toAdd) => Add(toAdd.Item, toAdd.Quantity);
 
     /// <summary>
     /// Removes the specified items from the inventory
     /// </summary>
-    /// <param name="toRemove"></param>
     /// <returns>The actual number of items removed</returns>
-    public int Remove(ItemStack toRemove)
+    public int Remove(Item item, int quantity)
     {
-        int remaining = toRemove.Quantity;
+        int remaining = quantity;
         List<ItemStack> oldStacks = new List<ItemStack>(itemStacks);
         foreach (ItemStack stack in oldStacks)
         {
-            if (stack.Item == toRemove.Item)
+            if (stack.Item == item)
             {
                 if (stack.Quantity > remaining)
                 {
@@ -56,23 +60,30 @@ public class Inventory : MonoBehaviour
                 {
                     remaining -= stack.Quantity;
                     itemStacks.Remove(stack);
+                    if (itemStacks.Count == 0)
+                    {
+                        onEmpty.Invoke();
+                    }
                 }
 
                 if (remaining == 0)
                 {
-                    return toRemove.Quantity;
+                    return quantity;
                 }
             }
         }
-        return toRemove.Quantity - remaining;
+        return quantity - remaining;
     }
+    public int Remove(ItemStack toRemove) => Remove(toRemove.Item, toRemove.Quantity);
 
-    public void DropAll(Vector3 position)
+    public List<GameObject> DropAll(Vector3 position)
     {
+        List<GameObject> itemPiles = new List<GameObject>();
         foreach (ItemStack stack in itemStacks)
         {
-            stack.Item.SpawnPile(stack.Quantity, position, transform.rotation);
+            itemPiles.Add(stack.Item.SpawnPile(stack.Quantity, position, transform.rotation));
         }
         itemStacks.Clear();
+        return itemPiles;
     }
 }

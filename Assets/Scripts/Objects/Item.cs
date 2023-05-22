@@ -10,11 +10,7 @@ public class Item : ScriptableObject
     {
         GameObject gameObject = Instantiate(pilePrefab, position, rotation);
         Inventory inventory = gameObject.GetComponent<Inventory>();
-        inventory.Add(new ItemStack
-        {
-            Item = this,
-            Quantity = quantity
-        });
+        inventory.Add(this, quantity);
         return gameObject;
     }
 }

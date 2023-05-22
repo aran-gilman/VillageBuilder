@@ -20,11 +20,7 @@ public class RetrieveCommand : ICommand
         }
         else
         {
-            Destination.Add(new ItemStack()
-            {
-                Item = Items.Item,
-                Quantity = retrieved
-            });
+            Destination.Add(Items.Item, retrieved);
         }
         return ICommand.State.Stopped;
     }
