@@ -6,7 +6,7 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField]
     private List<ItemStack> itemStacks;
-    public IEnumerable<ItemStack> ItemStacks => itemStacks;
+    public IReadOnlyList<ItemStack> ItemStacks => itemStacks;
 
     [SerializeField]
     private UnityEvent onEmpty;
@@ -75,6 +75,21 @@ public class Inventory : MonoBehaviour
         return quantity - remaining;
     }
     public int Remove(ItemStack toRemove) => Remove(toRemove.Item, toRemove.Quantity);
+
+    public int RemoveAll(Item item)
+    {
+        int quantity = 0;
+        List<ItemStack> oldStacks = new List<ItemStack>(itemStacks);
+        foreach (ItemStack stack in oldStacks)
+        {
+            if (stack.Item == item)
+            {
+                quantity += stack.Quantity;
+                itemStacks.Remove(stack);
+            }
+        }
+        return quantity;
+    }
 
     public List<GameObject> DropAll(Vector3 position)
     {
