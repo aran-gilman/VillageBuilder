@@ -14,9 +14,11 @@ public class ActorAI : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         // For testing only
-        Inventory inventory = GetComponent<Inventory>();
-        RetrieveItemTarget target = FindObjectOfType<RetrieveItemTarget>();
+        var target = FindObjectOfType<ChopTarget>();
         commandRunner.AddCommand(new ApproachCommand(navMeshAgent, target.transform));
-        commandRunner.AddCommand(new RetrieveCommand(inventory, target.Inventory, target.Inventory.ItemStacks.First()));
+        commandRunner.AddCommand(new ChopCommand(target.Inventory));
+
+        //Inventory inventory = GetComponent<Inventory>();
+        //commandRunner.AddCommand(new RetrieveCommand(inventory, target.Inventory, target.Inventory.ItemStacks.First()));
     }
 }

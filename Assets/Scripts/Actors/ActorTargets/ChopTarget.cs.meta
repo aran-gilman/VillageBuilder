@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: b853c6c493d2d414abada054338b76ed
+guid: 98ece0c4ece9bed498ce26a6e835fb38
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - pilePrefab: {fileID: 4359396949581191665, guid: d6699933b60b56f42b66098f71078ea2, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

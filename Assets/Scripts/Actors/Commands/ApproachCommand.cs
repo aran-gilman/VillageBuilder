@@ -24,6 +24,7 @@ public class ApproachCommand : ICommand
         Vector3 diff = Actor.destination - Actor.transform.position;
         if (diff.sqrMagnitude < StopDistanceSqr)
         {
+            Actor.ResetPath();
             return ICommand.State.Stopped;
         }
         return ICommand.State.Running;

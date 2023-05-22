@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b853c6c493d2d414abada054338b76ed, type: 3}
-  m_Name: Blueberry
+  m_Name: Wood
   m_EditorClassIdentifier: 
   pilePrefab: {fileID: 4359396949581191665, guid: d6699933b60b56f42b66098f71078ea2, type: 3}

@@ -66,4 +66,13 @@ public class Inventory : MonoBehaviour
         }
         return toRemove.Quantity - remaining;
     }
+
+    public void DropAll(Vector3 position)
+    {
+        foreach (ItemStack stack in itemStacks)
+        {
+            stack.Item.SpawnPile(stack.Quantity, position, transform.rotation);
+        }
+        itemStacks.Clear();
+    }
 }
