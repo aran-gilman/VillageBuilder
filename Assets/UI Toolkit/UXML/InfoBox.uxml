@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Box style="flex-direction: row;">
+        <ui:Image name="object-image" style="width: 128px; height: 128px; background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=8228938214290033325&amp;guid=a6a93c520f353874dbac5cd905f7dc39&amp;type=3#console.erroricon&apos;); min-width: 128px; min-height: 128px;" />
+        <ui:VisualElement>
+            <ui:TextElement text="Object Name" name="object-name" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+            <ui:TextElement text="Object Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." name="object-description" style="margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px;" />
+        </ui:VisualElement>
+    </ui:Box>
+</ui:UXML>

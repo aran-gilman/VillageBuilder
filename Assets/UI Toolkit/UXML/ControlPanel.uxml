@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="InfoBox" src="project://database/Assets/InfoBox.uxml?fileID=9197481963319205126&amp;guid=ec428842af2326c498348ad423fa37a5&amp;type=3#InfoBox" />
+    <ui:VisualElement style="position: absolute; left: 0; bottom: 0; width: 100%;">
+        <ui:Instance template="InfoBox" style="width: 30%;" />
+    </ui:VisualElement>
+</ui:UXML>
