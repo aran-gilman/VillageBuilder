@@ -102,6 +102,10 @@ public class Inventory : MonoBehaviour
             }
         }
         onRemove.Invoke(item, quantity);
+        if (itemStacks.Count == 0)
+        {
+            onEmpty.Invoke();
+        }
         return quantity;
     }
 
