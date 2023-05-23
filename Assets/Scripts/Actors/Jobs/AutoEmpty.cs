@@ -2,11 +2,8 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(RetrieveItemTarget))]
-public class AutoEmpty : MonoBehaviour
+public class AutoEmpty : JobDesignation
 {
-    [SerializeField]
-    private JobDispatcher jobDispatcher;
-
     private RetrieveItemTarget source;
 
     private bool IsHaulingJobForItem(IJob job, Item item)
