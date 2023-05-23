@@ -22,17 +22,6 @@ public class ActorAI : MonoBehaviour
         var target = FindObjectOfType<ChopTarget>();
         CommandRunner.AddCommand(new ApproachCommand(NavMeshAgent, target.transform));
         CommandRunner.AddCommand(new ChopCommand(target.Inventory));
-
-        /*
-        var target = GameObject.Find("Bush").GetComponentInChildren<RetrieveItemTarget>();
-        var storage = FindObjectOfType<DepositItemTarget>();
-        CommandRunner.AddCommand(new ApproachCommand(NavMeshAgent, target.transform));
-
-        Item itemToRetrieve = target.Inventory.ItemStacks[0].Item;
-        CommandRunner.AddCommand(new TransferItemsCommand(Inventory, target.Inventory, itemToRetrieve));
-        CommandRunner.AddCommand(new ApproachCommand(NavMeshAgent, storage.transform));
-        CommandRunner.AddCommand(new TransferItemsCommand(storage.Inventory, Inventory, itemToRetrieve));
-        */
     }
 
     private void Update()
