@@ -17,3 +17,4 @@ MonoBehaviour:
   pitchCameraEvent: {fileID: 11400000, guid: 156d9a8c9c7168c4e880ec7c7d70859b, type: 2}
   moveCameraEvent: {fileID: 11400000, guid: d43176de83f7c6140a7fe48b8bec9951, type: 2}
   cameraMoveSensitivity: 10
+  selectWorldObjectEvent: {fileID: 11400000, guid: 698322d7038f63040b0dbe628e0f81f3, type: 2}
