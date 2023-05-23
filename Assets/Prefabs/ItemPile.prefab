@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4359396949427025958}
   - component: {fileID: 4359396949427025977}
   - component: {fileID: 4359396949427025976}
-  - component: {fileID: 4359396949427025959}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4359396949427025959
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4359396949427025957}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4359396949581191665
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,6 +96,7 @@ GameObject:
   - component: {fileID: 2926593393980068709}
   - component: {fileID: 4141862061466978984}
   - component: {fileID: 5427805548237470945}
+  - component: {fileID: 5424134402054672945}
   m_Layer: 0
   m_Name: ItemPile
   m_TagString: Untagged
@@ -205,3 +192,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jobDispatcher: {fileID: 11400000, guid: 6240129ce8b3ab54390fb9b129c3f67b, type: 2}
+--- !u!65 &5424134402054672945
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359396949581191665}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
