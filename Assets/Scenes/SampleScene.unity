@@ -385,6 +385,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemStacks: []
+  onAdd:
+    m_PersistentCalls:
+      m_Calls: []
+  onRemove:
+    m_PersistentCalls:
+      m_Calls: []
   onEmpty:
     m_PersistentCalls:
       m_Calls: []
@@ -878,6 +884,12 @@ MonoBehaviour:
   itemStacks:
   - Item: {fileID: 11400000, guid: cd0aa294ddc5ca3468de67604e716031, type: 2}
     Quantity: 5
+  onAdd:
+    m_PersistentCalls:
+      m_Calls: []
+  onRemove:
+    m_PersistentCalls:
+      m_Calls: []
   onEmpty:
     m_PersistentCalls:
       m_Calls: []
@@ -951,6 +963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46377ed2a1467534fbf8b16f9dc5a013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jobDispatcher: {fileID: 11400000, guid: 6240129ce8b3ab54390fb9b129c3f67b, type: 2}
 --- !u!114 &948117435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -964,6 +977,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemStacks: []
+  onAdd:
+    m_PersistentCalls:
+      m_Calls: []
+  onRemove:
+    m_PersistentCalls:
+      m_Calls: []
   onEmpty:
     m_PersistentCalls:
       m_Calls: []
@@ -1846,6 +1865,12 @@ MonoBehaviour:
   itemStacks:
   - Item: {fileID: 11400000, guid: c158c6c77d0e0494fbb56423c625f2c8, type: 2}
     Quantity: 10
+  onAdd:
+    m_PersistentCalls:
+      m_Calls: []
+  onRemove:
+    m_PersistentCalls:
+      m_Calls: []
   onEmpty:
     m_PersistentCalls:
       m_Calls: []

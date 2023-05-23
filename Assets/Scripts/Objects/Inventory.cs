@@ -9,7 +9,16 @@ public class Inventory : MonoBehaviour
     public IReadOnlyList<ItemStack> ItemStacks => itemStacks;
 
     [SerializeField]
+    private UnityEvent<Item, int> onAdd;
+    public UnityEvent<Item, int> OnAdd => onAdd;
+
+    [SerializeField]
+    private UnityEvent<Item, int> onRemove;
+    public UnityEvent<Item, int> OnRemove => onRemove;
+
+    [SerializeField]
     private UnityEvent onEmpty;
+    public UnityEvent OnEmpty => onEmpty;
 
     public int Count(Item item)
     {
@@ -29,12 +38,13 @@ public class Inventory : MonoBehaviour
     /// </summary>
     /// <returns>The actual number of items added</returns>
     public int Add(Item item, int quantity)
-    {
+    { 
         itemStacks.Add(new ItemStack()
         {
             Item = item,
             Quantity = quantity
         });
+        onAdd.Invoke(item, quantity);
         return quantity;
     }
 
@@ -68,11 +78,14 @@ public class Inventory : MonoBehaviour
 
                 if (remaining == 0)
                 {
+                    onRemove.Invoke(item, quantity);
                     return quantity;
                 }
             }
         }
-        return quantity - remaining;
+        int removed = quantity - remaining;
+        onRemove.Invoke(item, removed);
+        return removed;
     }
     public int Remove(ItemStack toRemove) => Remove(toRemove.Item, toRemove.Quantity);
 
@@ -88,6 +101,7 @@ public class Inventory : MonoBehaviour
                 itemStacks.Remove(stack);
             }
         }
+        onRemove.Invoke(item, quantity);
         return quantity;
     }
 

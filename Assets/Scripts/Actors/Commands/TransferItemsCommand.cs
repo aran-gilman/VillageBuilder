@@ -7,7 +7,7 @@ public class TransferItemsCommand : ICommand
     public Item Item { get; private set; }
     public int Quantity { get; private set; }
 
-    public TransferItemsCommand(Inventory destination, Inventory source, Item item, int quantity = kTransferAll)
+    public TransferItemsCommand(Inventory source, Inventory destination, Item item, int quantity = kTransferAll)
     {
         Destination = destination;
         Source = source;

@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 8191980236950530507}
   - component: {fileID: 2926593393980068709}
   - component: {fileID: 4141862061466978984}
+  - component: {fileID: 5427805548237470945}
   m_Layer: 0
   m_Name: ItemPile
   m_TagString: Untagged
@@ -145,6 +146,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemStacks: []
+  onAdd:
+    m_PersistentCalls:
+      m_Calls: []
+  onRemove:
+    m_PersistentCalls:
+      m_Calls: []
   onEmpty:
     m_PersistentCalls:
       m_Calls:
@@ -185,3 +192,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc8306e8cc65b1459f145cdd9941d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5427805548237470945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359396949581191665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbef57df7a15eeb418e5c3924dfa22fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jobDispatcher: {fileID: 11400000, guid: 6240129ce8b3ab54390fb9b129c3f67b, type: 2}
