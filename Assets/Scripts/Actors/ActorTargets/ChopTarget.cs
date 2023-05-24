@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ChopTarget : ActorTarget
+public class ChopTarget : MonoBehaviour
 {
     [SerializeField]
     private Inventory inventory;
