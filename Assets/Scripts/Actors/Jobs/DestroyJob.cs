@@ -2,11 +2,13 @@ using System.Collections.Generic;
 
 public class DestroyJob : IJob
 {
-    public DestroyDesignation Target { get; private set; }
+    private readonly DestroyDesignation source;
 
-    public DestroyJob(DestroyDesignation target)
+    public JobDesignation Owner => source;
+
+    public DestroyJob(DestroyDesignation source)
     {
-        Target = target;
+        this.source = source;
     }
 
     public bool CanPerformWith(ActorAI actor)
@@ -18,14 +20,14 @@ public class DestroyJob : IJob
     {
         IEnumerable<ICommand> commands = new List<ICommand>()
         {
-            new ApproachCommand(actor.NavMeshAgent, Target.transform),
-            new ChopCommand(Target.Inventory)
+            new ApproachCommand(actor.NavMeshAgent, Owner.transform),
+            new ChopCommand(source.Inventory)
         };
         return new CompositeCommand(commands);
     }
 
     public bool IsValid()
     {
-        return Target != null;
+        return Owner != null;
     }
 }
