@@ -15,7 +15,7 @@ public class JobDispatcherEditor : Editor
         if (showJobs)
         {
             JobDispatcher jobDispatcher = serializedObject.targetObject as JobDispatcher;
-            foreach(Job job in jobDispatcher.OpenJobs)
+            foreach(Job job in jobDispatcher.AllJobs)
             {
                 EditorGUILayout.LabelField(job.DisplayName);
             }
