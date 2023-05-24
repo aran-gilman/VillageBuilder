@@ -6,6 +6,8 @@ public class DestroyJob : IJob
 
     public JobDesignation Owner => source;
 
+    public string DisplayName => $"Destroy {source.name}";
+
     public DestroyJob(DestroyDesignation source)
     {
         this.source = source;

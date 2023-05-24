@@ -7,6 +7,8 @@ public class HaulItemJob : IJob
     public DepositItemTarget Destination { get; private set; }
     public Item Item { get; private set; }
 
+    public string DisplayName => $"Haul {Item.name} from {Source.name} to {Destination.name}";
+
     public HaulItemJob(HaulDesignation owner, DepositItemTarget destination, Item item)
     {
         Owner = owner;
