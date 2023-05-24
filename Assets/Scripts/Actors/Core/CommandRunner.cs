@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class CommandRunner : MonoBehaviour
+public class CommandRunner
 {
     public bool IsIdle => queue.Count == 0;
 
@@ -34,7 +33,7 @@ public class CommandRunner : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void Run()
     {
         if (queue.Count > 0 && queue[0].Execute() == ICommand.State.Stopped)
         {
