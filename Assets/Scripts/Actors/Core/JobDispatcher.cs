@@ -14,6 +14,12 @@ public class JobDispatcher : ScriptableObject
         allJobs.Add(job);
     }
 
+    public void Cancel(Job job)
+    {
+        allJobs.Remove(job);
+        job.Assignee.CommandRunner.StopCurrentCommand();
+    }
+
     public bool AssignJob(Job job, ActorAI actor)
     {
         if (!job.IsValid())
@@ -26,6 +32,7 @@ public class JobDispatcher : ScriptableObject
             return false;
         }
         job.Status = Job.JobStatus.Assigned;
+        job.Assignee = actor;
         actor.CommandRunner.AddCommand(job.CreateCommand(actor));
         return true;
     }

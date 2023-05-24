@@ -6,6 +6,7 @@ public abstract class Job
         Assigned
     }
     public JobStatus Status { get; set; }
+    public ActorAI Assignee { get; set; }
 
     public string DisplayName { get; protected set; }
     public JobDesignation Owner { get; protected set; }
