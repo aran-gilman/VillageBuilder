@@ -4,17 +4,17 @@ using UnityEngine;
 [RequireComponent(typeof(RetrieveItemTarget))]
 public class HaulDesignation : JobDesignation
 {
-    public RetrieveItemTarget Source { get; private set; }
+    private RetrieveItemTarget source;
 
     public override bool CanCreateJob()
     {
-        return Source.Inventory.ItemStacks.Count > 0 && FindObjectOfType<DepositItemTarget>() != null;
+        return source.Inventory.ItemStacks.Count > 0 && FindObjectOfType<DepositItemTarget>() != null;
     }
 
     public override bool TryCreateJob()
     {
         bool didCreateJob = false;
-        foreach (ItemStack stack in Source.Inventory.ItemStacks)
+        foreach (ItemStack stack in source.Inventory.ItemStacks)
         {
             didCreateJob |= MaybeCreateJob(stack.Item);
         }
@@ -28,7 +28,7 @@ public class HaulDesignation : JobDesignation
             return false;
         }
         HaulItemJob haulJob = (HaulItemJob)job;
-        return haulJob.Source == Source && haulJob.Item == item;
+        return haulJob.Source == source && haulJob.Item == item;
     }
 
     private bool MaybeCreateJob(Item item)
@@ -38,7 +38,7 @@ public class HaulDesignation : JobDesignation
             DepositItemTarget destination = FindObjectOfType<DepositItemTarget>();
             if (destination != null)
             {
-                jobDispatcher.DispatchJob(new HaulItemJob(this, destination, item));
+                jobDispatcher.DispatchJob(new HaulItemJob(source, destination, item));
                 return true;
             }
         }
@@ -52,13 +52,13 @@ public class HaulDesignation : JobDesignation
 
     private void Awake()
     {
-        Source = GetComponent<RetrieveItemTarget>();
+        source = GetComponent<RetrieveItemTarget>();
     }
 
     private void OnEnable()
     {
-        Source.Inventory.OnAdd.AddListener(OnInventoryAdd);
-        foreach (ItemStack stack in Source.Inventory.ItemStacks)
+        source.Inventory.OnAdd.AddListener(OnInventoryAdd);
+        foreach (ItemStack stack in source.Inventory.ItemStacks)
         {
             MaybeCreateJob(stack.Item);
         }
@@ -66,6 +66,6 @@ public class HaulDesignation : JobDesignation
 
     private void OnDisable()
     {
-        Source.Inventory.OnAdd.RemoveListener(OnInventoryAdd);
+        source.Inventory.OnAdd.RemoveListener(OnInventoryAdd);
     }
 }
