@@ -109,14 +109,13 @@ public class Inventory : MonoBehaviour
         return quantity;
     }
 
-    public List<GameObject> DropAll(Vector3 position)
+    public void DropAll(Transform position)
     {
         List<GameObject> itemPiles = new List<GameObject>();
         foreach (ItemStack stack in itemStacks)
         {
-            itemPiles.Add(stack.Item.SpawnPile(stack.Quantity, position, transform.rotation));
+            itemPiles.Add(stack.Item.SpawnPile(stack.Quantity, position.position, transform.rotation));
         }
         itemStacks.Clear();
-        return itemPiles;
     }
 }

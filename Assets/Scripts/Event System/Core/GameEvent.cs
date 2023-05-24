@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+
 public abstract class GameEvent<TEventArg> : ScriptableObject
 {
     public event EventHandler<TEventArg> OnGameEvent;

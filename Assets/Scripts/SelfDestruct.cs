@@ -1,12 +1,30 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-/// <summary>
-/// Wrapper for Object.Destroy for use with UnityEvent callbacks
-/// </summary>
 public class SelfDestruct : MonoBehaviour
 {
-    public void DestroySelf()
+    [SerializeField]
+    private GameObjectGameEvent destroyEvent;
+
+    [SerializeField]
+    private UnityEvent onBeingDestroyed;
+
+    private void HandleDestroyEvent(object sender, GameObject toDestroy)
     {
-        Destroy(gameObject);
+        if (toDestroy == gameObject)
+        {
+            onBeingDestroyed.Invoke();
+            Destroy(gameObject);
+        }
+    }
+
+    private void Awake()
+    {
+        destroyEvent.OnGameEvent += HandleDestroyEvent;
+    }
+
+    private void OnDestroy()
+    {
+        destroyEvent.OnGameEvent -= HandleDestroyEvent;
     }
 }

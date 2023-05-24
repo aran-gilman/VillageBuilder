@@ -1,13 +1,16 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class DestroyJob : Job
 {
     private readonly DestroyDesignation source;
+    private GameObjectGameEvent destroyEvent;
 
-    public DestroyJob(DestroyDesignation source)
+    public DestroyJob(DestroyDesignation source, GameObjectGameEvent destroyEvent)
     {
         Owner = source;
         this.source = source;
+        this.destroyEvent = destroyEvent;
         DisplayName = $"Destroy {source.name}";
     }
 
@@ -21,7 +24,7 @@ public class DestroyJob : Job
         IEnumerable<ICommand> commands = new List<ICommand>()
         {
             new ApproachCommand(actor.NavMeshAgent, Owner.transform),
-            new ChopCommand(source.Inventory)
+            new EventCommand<GameObjectGameEvent, GameObject>(destroyEvent, source.gameObject)
         };
         return new CompositeCommand(commands);
     }

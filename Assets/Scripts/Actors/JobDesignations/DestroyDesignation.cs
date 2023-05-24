@@ -3,8 +3,7 @@ using UnityEngine;
 public class DestroyDesignation : JobDesignation
 {
     [SerializeField]
-    private Inventory inventory;
-    public Inventory Inventory => inventory;
+    private GameObjectGameEvent destroyEvent;
 
     public override bool CanCreateJob()
     {
@@ -13,7 +12,7 @@ public class DestroyDesignation : JobDesignation
 
     public override bool TryCreateJob()
     {
-        jobDispatcher.DispatchJob(new DestroyJob(this));
+        jobDispatcher.DispatchJob(new DestroyJob(this, destroyEvent));
         return true;
     }
 }
