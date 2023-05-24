@@ -21,6 +21,7 @@ public class JobTogglesPresenter : MonoBehaviour
         public void SetJob(JobDesignation newJob)
         {
             Toggle.gameObject.SetActive(newJob != null);
+            JobDesignation = newJob;
             if (newJob != null)
             {
                 Toggle.SetLabel(newJob.DisplayName);

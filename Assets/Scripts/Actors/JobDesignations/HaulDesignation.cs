@@ -8,12 +8,17 @@ public class HaulDesignation : JobDesignation
 
     public override bool CanCreateJob()
     {
-        return true;
+        return source.Inventory.ItemStacks.Count > 0 && FindObjectOfType<DepositItemTarget>() != null;
     }
 
     public override bool TryCreateJob()
     {
-        return false;
+        bool didCreateJob = false;
+        foreach (ItemStack stack in source.Inventory.ItemStacks)
+        {
+            didCreateJob |= MaybeCreateJob(stack.Item);
+        }
+        return didCreateJob;
     }
 
     private bool IsHaulingJobForItem(IJob job, Item item)
@@ -26,13 +31,18 @@ public class HaulDesignation : JobDesignation
         return haulJob.Source == source && haulJob.Item == item;
     }
 
-    private void MaybeCreateJob(Item item)
+    private bool MaybeCreateJob(Item item)
     {
         if (!jobDispatcher.OpenJobs.Any(job => IsHaulingJobForItem(job, item)))
         {
             DepositItemTarget destination = FindObjectOfType<DepositItemTarget>();
-            jobDispatcher.DispatchJob(new HaulItemJob(source, destination, item));
+            if (destination != null)
+            {
+                jobDispatcher.DispatchJob(new HaulItemJob(source, destination, item));
+                return true;
+            }
         }
+        return false;
     }
 
     private void OnInventoryAdd(Item item, int quantity)
