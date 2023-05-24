@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ChopDesignation : JobDesignation
+public class DestroyDesignation : JobDesignation
 {
     [SerializeField]
     private Inventory inventory;
@@ -13,6 +13,7 @@ public class ChopDesignation : JobDesignation
 
     public override bool TryCreateJob()
     {
-        return false;
+        jobDispatcher.DispatchJob(new DestroyJob(this));
+        return true;
     }
 }
