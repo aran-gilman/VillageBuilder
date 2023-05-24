@@ -7,8 +7,9 @@ public abstract class Job
     }
     public JobStatus Status { get; set; }
 
-    public abstract string DisplayName { get; }
-    public abstract JobDesignation Owner { get; }
+    public string DisplayName { get; protected set; }
+    public JobDesignation Owner { get; protected set; }
+
     public abstract bool CanPerformWith(ActorAI actor);
     public abstract bool IsValid();
     public abstract ICommand CreateCommand(ActorAI actor);

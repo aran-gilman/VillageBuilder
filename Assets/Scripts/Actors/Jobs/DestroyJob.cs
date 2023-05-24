@@ -4,15 +4,11 @@ public class DestroyJob : Job
 {
     private readonly DestroyDesignation source;
 
-    public override JobDesignation Owner => source;
-
-    private string displayName;
-    public override string DisplayName => displayName;
-
     public DestroyJob(DestroyDesignation source)
     {
+        Owner = source;
         this.source = source;
-        displayName = $"Destroy {source.name}";
+        DisplayName = $"Destroy {source.name}";
     }
 
     public override bool CanPerformWith(ActorAI actor)
