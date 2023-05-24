@@ -1,23 +1,25 @@
 using System.Collections.Generic;
 
-public class HaulItemJob : IJob
+public class HaulItemJob : Job
 {
-    public JobDesignation Owner { get; private set; }
+    private readonly JobDesignation owner;
+    public override JobDesignation Owner => owner;
+
     public RetrieveItemTarget Source { get; private set; }
     public DepositItemTarget Destination { get; private set; }
     public Item Item { get; private set; }
 
-    public string DisplayName => $"Haul {Item.name} from {Source.name} to {Destination.name}";
+    public override string DisplayName => $"Haul {Item.name} from {Source.name} to {Destination.name}";
 
     public HaulItemJob(HaulDesignation owner, DepositItemTarget destination, Item item)
     {
-        Owner = owner;
+        this.owner = owner;
         Source = owner.Source;
         Destination = destination;
         Item = item;
     }
 
-    public ICommand CreateCommand(ActorAI actor)
+    public override ICommand CreateCommand(ActorAI actor)
     {
         IEnumerable<ICommand> commands = new List<ICommand>
         {
@@ -29,12 +31,12 @@ public class HaulItemJob : IJob
         return new CompositeCommand(commands);
     }
 
-    public bool CanPerformWith(ActorAI actor)
+    public override bool CanPerformWith(ActorAI actor)
     {
         return actor.NavMeshAgent != null && actor.Inventory != null;
     }
 
-    public bool IsValid()
+    public override bool IsValid()
     {
         bool isValid = true;
         isValid &= Source.gameObject.activeSelf;

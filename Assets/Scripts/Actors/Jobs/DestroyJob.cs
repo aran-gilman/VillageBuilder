@@ -1,24 +1,24 @@
 using System.Collections.Generic;
 
-public class DestroyJob : IJob
+public class DestroyJob : Job
 {
     private readonly DestroyDesignation source;
 
-    public JobDesignation Owner => source;
+    public override JobDesignation Owner => source;
 
-    public string DisplayName => $"Destroy {source.name}";
+    public override string DisplayName => $"Destroy {source.name}";
 
     public DestroyJob(DestroyDesignation source)
     {
         this.source = source;
     }
 
-    public bool CanPerformWith(ActorAI actor)
+    public override bool CanPerformWith(ActorAI actor)
     {
         return true;
     }
 
-    public ICommand CreateCommand(ActorAI actor)
+    public override ICommand CreateCommand(ActorAI actor)
     {
         IEnumerable<ICommand> commands = new List<ICommand>()
         {
@@ -28,7 +28,7 @@ public class DestroyJob : IJob
         return new CompositeCommand(commands);
     }
 
-    public bool IsValid()
+    public override bool IsValid()
     {
         return Owner != null;
     }
