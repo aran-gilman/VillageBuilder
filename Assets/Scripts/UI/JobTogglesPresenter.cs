@@ -15,7 +15,7 @@ public class JobTogglesPresenter : MonoBehaviour
         public ToggleJobPair(TogglePresenter toggle)
         {
             Toggle = toggle;
-            Toggle.OnTrue.AddListener(TryCreateJob);
+            Toggle.OnClick.AddListener(HandleClick);
         }
 
         public void SetJob(JobDesignation newJob)
@@ -28,9 +28,9 @@ public class JobTogglesPresenter : MonoBehaviour
             }
         }
 
-        private void TryCreateJob()
+        private void HandleClick(bool currentValue)
         {
-            if (JobDesignation != null)
+            if (!currentValue && JobDesignation != null)
             {
                 Toggle.IsOn = JobDesignation.TryCreateJob();
             }

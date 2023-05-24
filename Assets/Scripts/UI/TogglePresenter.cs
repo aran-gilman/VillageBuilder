@@ -17,14 +17,9 @@ public class TogglePresenter : MonoBehaviour
     private GameObject toggleDisplay;
 
     [SerializeField]
-    private UnityEvent onTrue;
-    public UnityEvent OnTrue => onTrue;
+    private UnityEvent<bool> onClick;
+    public UnityEvent<bool> OnClick => onClick;
 
-    [SerializeField]
-    private UnityEvent onFalse;
-    public UnityEvent OnFalse => onFalse;
-
-    // We don't call OnTrue or OnFalse automatically because the main use case for TogglePresenter
     public bool IsOn
     {
         get => isOn;
@@ -56,23 +51,15 @@ public class TogglePresenter : MonoBehaviour
         imageDisplay.gameObject.SetActive(sprite != null);
     }
 
-    private void OnClick()
+    private void HandleClick()
     {
-        IsOn = !IsOn;
-        if (IsOn)
-        {
-            onTrue.Invoke();
-        }
-        else
-        {
-            onFalse.Invoke();
-        }
+        onClick.Invoke(IsOn);
     }
 
     private void Awake()
     {
         button = GetComponent<Button>();
-        button.onClick.AddListener(OnClick);
+        button.onClick.AddListener(HandleClick);
     }
 
     private void OnEnable()
