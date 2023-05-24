@@ -4,15 +4,15 @@ using UnityEngine;
 [CreateAssetMenu]
 public class JobDispatcher : ScriptableObject
 {
-    private List<Job> openJobs = new List<Job>();
-    public IEnumerable<Job> OpenJobs => openJobs;
+    private List<IJob> openJobs = new List<IJob>();
+    public IEnumerable<IJob> OpenJobs => openJobs;
 
-    public void DispatchJob(Job job)
+    public void DispatchJob(IJob job)
     {
         openJobs.Add(job);
     }
 
-    public bool AssignJob(Job job, ActorAI actor)
+    public bool AssignJob(IJob job, ActorAI actor)
     {
         if (!job.IsValid())
         {

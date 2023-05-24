@@ -21,7 +21,7 @@ public class HaulDesignation : JobDesignation
         return didCreateJob;
     }
 
-    private bool IsHaulingJobForItem(Job job, Item item)
+    private bool IsHaulingJobForItem(IJob job, Item item)
     {
         if (job is not HaulItemJob)
         {
