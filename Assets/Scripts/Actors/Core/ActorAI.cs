@@ -19,9 +19,11 @@ public class ActorAI : MonoBehaviour
         Inventory = GetComponent<Inventory>();
 
         // For testing only
+        /*
         var target = FindObjectOfType<ChopTarget>();
         CommandRunner.AddCommand(new ApproachCommand(NavMeshAgent, target.transform));
         CommandRunner.AddCommand(new ChopCommand(target.Inventory));
+        */
     }
 
     private void Update()
