@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(RetrieveItemTarget))]
-public class AutoEmpty : JobDesignation
+public class HaulDesignation : JobDesignation
 {
     private RetrieveItemTarget source;
 

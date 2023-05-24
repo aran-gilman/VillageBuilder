@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jobDispatcher: {fileID: 11400000, guid: 6240129ce8b3ab54390fb9b129c3f67b, type: 2}
+  displayName: Pick Up
 --- !u!65 &5424134402054672945
 BoxCollider:
   m_ObjectHideFlags: 0
