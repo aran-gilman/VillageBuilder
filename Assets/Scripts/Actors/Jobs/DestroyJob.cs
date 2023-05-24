@@ -14,14 +14,14 @@ public class DestroyJob : IJob
         return true;
     }
 
-    public IEnumerable<ICommand> CreateCommands(ActorAI actor)
+    public ICommand CreateCommand(ActorAI actor)
     {
         IEnumerable<ICommand> commands = new List<ICommand>()
         {
             new ApproachCommand(actor.NavMeshAgent, Target.transform),
             new ChopCommand(Target.Inventory)
         };
-        return commands;
+        return new CompositeCommand(commands);
     }
 
     public bool IsValid()

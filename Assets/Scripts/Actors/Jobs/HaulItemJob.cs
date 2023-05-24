@@ -13,7 +13,7 @@ public class HaulItemJob : IJob
         Item = item;
     }
 
-    public IEnumerable<ICommand> CreateCommands(ActorAI actor)
+    public ICommand CreateCommand(ActorAI actor)
     {
         IEnumerable<ICommand> commands = new List<ICommand>
         {
@@ -22,7 +22,7 @@ public class HaulItemJob : IJob
             new ApproachCommand(actor.NavMeshAgent, Destination.transform),
             new TransferItemsCommand(actor.Inventory, Destination.Inventory, Item)
         };
-        return commands;
+        return new CompositeCommand(commands);
     }
 
     public bool CanPerformWith(ActorAI actor)

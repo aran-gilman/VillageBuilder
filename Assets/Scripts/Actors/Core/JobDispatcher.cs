@@ -24,7 +24,7 @@ public class JobDispatcher : ScriptableObject
             return false;
         }
         openJobs.Remove(job);
-        actor.CommandRunner.AddCommands(job.CreateCommands(actor));
+        actor.CommandRunner.AddCommand(job.CreateCommand(actor));
         return true;
     }
 }
