@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class HaulItemJob : IJob
+public class HaulItemJob : Job
 {
     public RetrieveItemTarget Source { get; private set; }
     public DepositItemTarget Destination { get; private set; }
@@ -13,7 +13,7 @@ public class HaulItemJob : IJob
         Item = item;
     }
 
-    public IEnumerable<ICommand> CreateCommands(ActorAI actor)
+    public override IEnumerable<ICommand> CreateCommands(ActorAI actor)
     {
         IEnumerable<ICommand> commands = new List<ICommand>
         {
@@ -25,12 +25,12 @@ public class HaulItemJob : IJob
         return commands;
     }
 
-    public bool CanPerformWith(ActorAI actor)
+    public override bool CanPerformWith(ActorAI actor)
     {
         return actor.NavMeshAgent != null && actor.Inventory != null;
     }
 
-    public bool IsValid()
+    public override bool IsValid()
     {
         bool isValid = true;
         isValid &= Source.gameObject.activeSelf;

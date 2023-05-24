@@ -30,7 +30,7 @@ public class ActorAI : MonoBehaviour
     {
         if (CommandRunner.IsIdle)
         {
-            IJob job = jobDispatcher.OpenJobs.FirstOrDefault();
+            Job job = jobDispatcher.OpenJobs.FirstOrDefault();
             if (job != null)
             {
                 jobDispatcher.AssignJob(job, this);

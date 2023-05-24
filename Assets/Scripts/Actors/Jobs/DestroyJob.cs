@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class DestroyJob : IJob
+public class DestroyJob : Job
 {
     public DestroyDesignation Target { get; private set; }
 
@@ -9,12 +9,12 @@ public class DestroyJob : IJob
         Target = target;
     }
 
-    public bool CanPerformWith(ActorAI actor)
+    public override bool CanPerformWith(ActorAI actor)
     {
         return true;
     }
 
-    public IEnumerable<ICommand> CreateCommands(ActorAI actor)
+    public override IEnumerable<ICommand> CreateCommands(ActorAI actor)
     {
         IEnumerable<ICommand> commands = new List<ICommand>()
         {
@@ -24,7 +24,7 @@ public class DestroyJob : IJob
         return commands;
     }
 
-    public bool IsValid()
+    public override bool IsValid()
     {
         return Target != null;
     }
