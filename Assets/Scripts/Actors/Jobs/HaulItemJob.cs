@@ -2,13 +2,15 @@ using System.Collections.Generic;
 
 public class HaulItemJob : IJob
 {
+    public JobDesignation Owner { get; private set; }
     public RetrieveItemTarget Source { get; private set; }
     public DepositItemTarget Destination { get; private set; }
     public Item Item { get; private set; }
 
-    public HaulItemJob(RetrieveItemTarget source, DepositItemTarget destination, Item item)
+    public HaulItemJob(HaulDesignation owner, DepositItemTarget destination, Item item)
     {
-        Source = source;
+        Owner = owner;
+        Source = owner.Source;
         Destination = destination;
         Item = item;
     }
