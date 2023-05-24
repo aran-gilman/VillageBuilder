@@ -891,6 +891,7 @@ GameObject:
   - component: {fileID: 583526698}
   - component: {fileID: 583526700}
   - component: {fileID: 583526699}
+  - component: {fileID: 583526701}
   m_Layer: 0
   m_Name: Storage
   m_TagString: Untagged
@@ -980,6 +981,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &583526701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583526695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc8306e8cc65b1459f145cdd9941d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyEvent: {fileID: 11400000, guid: 058ee933c293b844e99fc11175f7d7cf, type: 2}
+  onBeingDestroyed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 583526697}
+        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+        m_MethodName: DropAll
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 583526696}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &618393788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,7 +1382,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731415619}
-  m_LocalRotation: {x: 0.40455353, y: -0.000000010719806, z: 0.000000004742117, w: 0.91451436}
+  m_LocalRotation: {x: 0.40455353, y: 0.000000029287023, z: -0.000000012955695, w: 0.9145143}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1420,6 +1449,7 @@ GameObject:
   - component: {fileID: 913247452}
   - component: {fileID: 913247451}
   - component: {fileID: 913247453}
+  - component: {fileID: 913247454}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Untagged
@@ -1511,6 +1541,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Berry Bush
   shortDescription: Grows tasty berries.
+--- !u!114 &913247454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913247448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc8306e8cc65b1459f145cdd9941d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyEvent: {fileID: 11400000, guid: 058ee933c293b844e99fc11175f7d7cf, type: 2}
+  onBeingDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &918068135
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,6 +1672,7 @@ GameObject:
   - component: {fileID: 948117435}
   - component: {fileID: 948117437}
   - component: {fileID: 948117438}
+  - component: {fileID: 948117439}
   m_Layer: 0
   m_Name: Villager
   m_TagString: Untagged
@@ -1734,6 +1781,22 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &948117439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948117431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc8306e8cc65b1459f145cdd9941d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyEvent: {fileID: 11400000, guid: 058ee933c293b844e99fc11175f7d7cf, type: 2}
+  onBeingDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
