@@ -84,6 +84,7 @@ public class JobTogglesPresenter : MonoBehaviour
         }
 
         JobDesignation[] jobDesignations = JobSource.GetComponentsInChildren<JobDesignation>();
+        int numJobsDisplayed = 0;
         for (int i = 0; i < jobDesignations.Length; i++)
         {
             if (jobDesignations[i].CanCreateJob())
@@ -95,10 +96,11 @@ public class JobTogglesPresenter : MonoBehaviour
                     toggles.Add(new ToggleJobPair(toggle));
                 }
                 toggles[i].SetJob(jobDesignations[i]);
+                numJobsDisplayed++;
             }
         }
 
-        for (int i = jobDesignations.Length; i < toggles.Count; i++)
+        for (int i = numJobsDisplayed; i < toggles.Count; i++)
         {
             toggles[i].SetJob(null);
         }
