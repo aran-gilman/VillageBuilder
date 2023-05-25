@@ -39,7 +39,15 @@ public class JobTogglesPresenter : MonoBehaviour
 
         private void HandleClick(bool currentValue)
         {
-            if (!currentValue && JobDesignation != null)
+            if (currentValue)
+            {
+                List<Job> jobs = new List<Job>(JobDesignation.CurrentJobs);
+                foreach (Job job in jobs)
+                {
+                    job.Cancel();
+                }
+            }
+            else
             {
                 JobDesignation.DispatchJob();
                 Toggle.IsOn = JobDesignation.HasActiveJob();
