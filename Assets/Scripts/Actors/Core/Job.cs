@@ -17,7 +17,7 @@ public abstract class Job
     public string DisplayName { get; protected set; }
     public JobDesignation Owner { get; protected set; }
 
-    private CompositeCommand command;
+    protected CompositeCommand command;
 
     public abstract bool CanPerformWith(ActorAI actor);
     public abstract bool IsValid();

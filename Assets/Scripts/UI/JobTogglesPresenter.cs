@@ -29,9 +29,9 @@ public class JobTogglesPresenter : MonoBehaviour
                 JobDesignation.OnAllJobsCompleted.RemoveListener(HandleJobCompleted);
             }
             JobDesignation = newJob;
-            if (newJob != null)
+            if (JobDesignation != null)
             {
-                Toggle.SetLabel(newJob.DisplayName);
+                Toggle.SetLabel(JobDesignation.DisplayName);
                 Toggle.IsOn = JobDesignation.HasActiveJob();
                 JobDesignation.OnAllJobsCompleted.AddListener(HandleJobCompleted);
             }
@@ -46,7 +46,10 @@ public class JobTogglesPresenter : MonoBehaviour
                 {
                     job.Cancel();
                 }
-                Toggle.IsOn = JobDesignation.HasActiveJob(); 
+                if (JobDesignation != null)
+                {
+                    Toggle.IsOn = JobDesignation.HasActiveJob();
+                }
             }
             else
             {

@@ -8,6 +8,10 @@ public class CommandRunner
     public bool IsIdle => queue.Count == 0;
 
     private List<ICommand> queue = new List<ICommand>();
+    public IEnumerable<ICommand> Queue => queue;
+
+    private List<ICommand> history = new List<ICommand>();
+    public IEnumerable<ICommand> History => history;
 
     public void AddCommand(ICommand command)
     {
@@ -55,8 +59,14 @@ public class CommandRunner
         }
     }
 
+    public void ClearHistory()
+    {
+        history.Clear();
+    }
+
     private void Next()
     {
+        history.Add(queue[0]);
         queue.RemoveAt(0);
         if (queue.Count > 0)
         {
