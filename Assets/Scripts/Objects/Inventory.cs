@@ -38,12 +38,25 @@ public class Inventory : MonoBehaviour
     /// </summary>
     /// <returns>The actual number of items added</returns>
     public int Add(Item item, int quantity)
-    { 
-        itemStacks.Add(new ItemStack()
+    {
+        bool foundStack = false;
+        foreach (ItemStack stack in ItemStacks)
         {
-            Item = item,
-            Quantity = quantity
-        });
+            if (stack.Item == item)
+            {
+                stack.Quantity += quantity;
+                foundStack = true;
+                break;
+            }
+        }
+        if (!foundStack)
+        {
+            itemStacks.Add(new ItemStack()
+            {
+                Item = item,
+                Quantity = quantity
+            });
+        }
         onAdd.Invoke(item, quantity);
         return quantity;
     }
@@ -65,6 +78,7 @@ public class Inventory : MonoBehaviour
                 if (stack.Quantity > remaining)
                 {
                     stack.Quantity -= remaining;
+                    remaining = 0;
                 }
                 else
                 {
