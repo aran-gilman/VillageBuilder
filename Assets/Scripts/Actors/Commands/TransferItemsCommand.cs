@@ -1,32 +1,34 @@
 public class TransferItemsCommand : ICommand
 {
-    public const int kTransferAll = -1;
-
     public Inventory Destination { get; private set; }
     public Inventory Source { get; private set; }
     public Item Item { get; private set; }
-    public int Quantity { get; private set; }
+    public IProvider<int> Quantity { get; private set; }
 
-    public TransferItemsCommand(Inventory source, Inventory destination, Item item, int quantity = kTransferAll)
+    public TransferItemsCommand(Inventory source, Inventory destination, Item item, IProvider<int> quantity = null)
     {
         Destination = destination;
         Source = source;
         Item = item;
-        Quantity = quantity;
+        
+        if (quantity == null)
+        {
+            Quantity = new InventoryCountProvider(Source, Item);
+        }
+        else
+        {
+            Quantity = quantity;
+        }
     }
 
     public ICommand.State Execute()
     {
-        int quantityRetrieved;
-        if (Quantity == kTransferAll)
+        int quantityToRetrieve = Quantity.Get();
+        if (quantityToRetrieve > 0)
         {
-            quantityRetrieved = Source.RemoveAll(Item);
+            int actualQuantity = Source.Remove(Item, Quantity.Get());
+            Destination.Add(Item, actualQuantity);
         }
-        else
-        {
-            quantityRetrieved = Source.Remove(Item, Quantity);
-        }
-        Destination.Add(Item, quantityRetrieved);
         return ICommand.State.Stopped;
     }
 
