@@ -17,28 +17,30 @@ public class InfoBoxPresenter : MonoBehaviour
     public GameObject DisplayedObject
     { 
         get => displayedObject;
-        set
+        private set
         {
-            if (!value.TryGetComponent<IInfoBoxModel>(out var model))
+            if (value == null || !value.TryGetComponent<IInfoBoxModel>(out var model))
             {
                 displayedObject = null;
+                gameObject.SetActive(false);
                 return;
             }
             displayedObject = value;
             nameElement.text = model.DisplayName;
             shortDescriptionElement.text = model.ShortDescription;
+            gameObject.SetActive(true);
         }
     }
 
-    public void Toggle()
+    public void ShowOrToggle(GameObject toDisplay)
     {
-        if (DisplayedObject == null)
+        if (toDisplay == DisplayedObject)
         {
-            gameObject.SetActive(false);
+            DisplayedObject = null;
         }
         else
         {
-            gameObject.SetActive(!gameObject.activeSelf);
+            DisplayedObject = toDisplay;
         }
     }
 

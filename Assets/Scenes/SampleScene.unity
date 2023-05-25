@@ -276,7 +276,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2057813544}
         m_TargetAssemblyTypeName: InfoBoxPresenter, Assembly-CSharp
-        m_MethodName: set_DisplayedObject
+        m_MethodName: ShowOrToggle
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -290,18 +290,6 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: JobTogglesPresenter, Assembly-CSharp
         m_MethodName: set_JobSource
         m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2057813544}
-        m_TargetAssemblyTypeName: InfoBoxPresenter, Assembly-CSharp
-        m_MethodName: Toggle
-        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1394,7 +1382,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 731415619}
-  m_LocalRotation: {x: 0.40455353, y: 0.000000029287023, z: -0.000000012955695, w: 0.9145143}
+  m_LocalRotation: {x: 0.40455353, y: -0.000000010719806, z: 0.000000004742117, w: 0.91451436}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3090,6 +3078,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jobDispatcher: {fileID: 11400000, guid: 6240129ce8b3ab54390fb9b129c3f67b, type: 2}
   displayName: Chop
+  onAllJobsCompleted:
+    m_PersistentCalls:
+      m_Calls: []
   destroyEvent: {fileID: 11400000, guid: 058ee933c293b844e99fc11175f7d7cf, type: 2}
 --- !u!114 &1927147694
 MonoBehaviour:
@@ -3899,3 +3890,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jobDispatcher: {fileID: 11400000, guid: 6240129ce8b3ab54390fb9b129c3f67b, type: 2}
   displayName: Harvest
+  onAllJobsCompleted:
+    m_PersistentCalls:
+      m_Calls: []
