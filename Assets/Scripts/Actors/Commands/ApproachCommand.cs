@@ -29,4 +29,9 @@ public class ApproachCommand : ICommand
         }
         return ICommand.State.Running;
     }
+
+    public void Cancel()
+    {
+        Actor.ResetPath();
+    }
 }

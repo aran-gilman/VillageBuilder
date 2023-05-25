@@ -14,8 +14,4 @@ public class EventCommand<TGameEvent, TEventArgs> : ICommand where TGameEvent : 
         GameEvent.Raise(Args);
         return ICommand.State.Stopped;
     }
-
-    public void Init()
-    {
-    }
 }

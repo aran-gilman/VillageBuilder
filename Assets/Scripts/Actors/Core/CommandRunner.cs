@@ -32,7 +32,18 @@ public class CommandRunner
     {
         if (queue.Count > 0)
         {
+            queue[0].Cancel();
             Next();
+        }
+    }
+
+    public void ClearCommands()
+    {
+        if (queue.Count > 0)
+        {
+            queue[0].Cancel();
+            queue.Clear();
+            OnBecomeIdle?.Invoke(this, null);
         }
     }
 

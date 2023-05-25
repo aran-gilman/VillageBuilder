@@ -21,4 +21,9 @@ public class CompositeCommand : ICommand
     {
         CommandRunner.AddCommands(Commands);
     }
+
+    public void Cancel()
+    {
+        CommandRunner.ClearCommands();
+    }
 }

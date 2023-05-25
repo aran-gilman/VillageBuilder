@@ -31,8 +31,4 @@ public class TransferItemsCommand : ICommand
         }
         return ICommand.State.Stopped;
     }
-
-    public void Init()
-    {
-    }
 }

@@ -6,6 +6,7 @@ public interface ICommand
         Stopped
     }
 
-    void Init();
+    void Init() { }
     State Execute();
+    void Cancel() { }
 }
