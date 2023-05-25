@@ -24,10 +24,19 @@ public class JobTogglesPresenter : MonoBehaviour
         public void SetJob(JobDesignation newJob)
         {
             Toggle.gameObject.SetActive(newJob != null);
+            if (JobDesignation != null && JobDesignation.CurrentJob != null)
+            {
+                JobDesignation.CurrentJob.OnJobCompleted -= HandleJobCompleted;
+            }
             JobDesignation = newJob;
             if (newJob != null)
             {
                 Toggle.SetLabel(newJob.DisplayName);
+                Toggle.IsOn = JobDesignation.CurrentJob != null;
+                if (JobDesignation.CurrentJob != null)
+                {
+                    JobDesignation.CurrentJob.OnJobCompleted += HandleJobCompleted;
+                }
             }
         }
 
@@ -35,8 +44,23 @@ public class JobTogglesPresenter : MonoBehaviour
         {
             if (!currentValue && JobDesignation != null)
             {
-                Toggle.IsOn = JobDesignation.TryCreateJob();
+                JobDesignation.DispatchJob();
+                if (JobDesignation.CurrentJob != null)
+                {
+                    JobDesignation.CurrentJob.OnJobCompleted += HandleJobCompleted;
+                    Toggle.IsOn = true;
+                }
+                else
+                {
+                    Toggle.IsOn = false;
+                }
             }
+        }
+
+        private void HandleJobCompleted(object sender, object args)
+        {
+            ((Job)sender).OnJobCompleted -= HandleJobCompleted;
+            Toggle.IsOn = false;
         }
     }
     private List<ToggleJobPair> toggles = new List<ToggleJobPair>();

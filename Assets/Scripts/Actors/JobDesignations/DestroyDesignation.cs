@@ -10,9 +10,8 @@ public class DestroyDesignation : JobDesignation
         return true;
     }
 
-    public override bool TryCreateJob()
+    protected override Job CreateJob()
     {
-        jobDispatcher.DispatchJob(new DestroyJob(this, destroyEvent));
-        return true;
+        return new DestroyJob(this, destroyEvent);
     }
 }

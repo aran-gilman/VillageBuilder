@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class CompositeCommand : ICommand
 {
-    private CommandRunner commandRunner = new CommandRunner();
+    public CommandRunner CommandRunner { get; } = new CommandRunner();
 
     public IEnumerable<ICommand> Commands { get; private set; }
 
@@ -13,12 +13,12 @@ public class CompositeCommand : ICommand
 
     public ICommand.State Execute()
     {
-        commandRunner.Run();
-        return commandRunner.IsIdle ? ICommand.State.Stopped : ICommand.State.Running;
+        CommandRunner.Run();
+        return CommandRunner.IsIdle ? ICommand.State.Stopped : ICommand.State.Running;
     }
 
     public void Init()
     {
-        commandRunner.AddCommands(Commands);
+        CommandRunner.AddCommands(Commands);
     }
 }

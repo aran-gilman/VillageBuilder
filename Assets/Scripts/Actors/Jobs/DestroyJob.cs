@@ -19,7 +19,7 @@ public class DestroyJob : Job
         return true;
     }
 
-    public override ICommand CreateCommand(ActorAI actor)
+    public override CompositeCommand CreateCommand(ActorAI actor)
     {
         IEnumerable<ICommand> commands = new List<ICommand>()
         {

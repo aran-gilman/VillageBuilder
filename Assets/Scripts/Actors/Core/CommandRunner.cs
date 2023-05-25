@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 
 public class CommandRunner
 {
+    public event EventHandler OnBecomeIdle;
+
     public bool IsIdle => queue.Count == 0;
 
     private List<ICommand> queue = new List<ICommand>();
@@ -47,6 +50,10 @@ public class CommandRunner
         if (queue.Count > 0)
         {
             queue[0].Init();
+        }
+        else
+        {
+            OnBecomeIdle?.Invoke(this, null);
         }
     }
 }

@@ -7,10 +7,11 @@ public class JobDispatcher : ScriptableObject
 {
     private List<Job> allJobs = new List<Job>();
     public IEnumerable<Job> AllJobs => allJobs;
-    public IEnumerable<Job> OpenJobs => allJobs.Where(job => job.Status == Job.JobStatus.Unassigned);
+    public IEnumerable<Job> OpenJobs => allJobs.Where(job => job.Status == Job.JobStatus.Available);
 
     public void DispatchJob(Job job)
     {
+        job.Status = Job.JobStatus.Available;
         allJobs.Add(job);
     }
 
@@ -22,18 +23,7 @@ public class JobDispatcher : ScriptableObject
 
     public bool AssignJob(Job job, ActorAI actor)
     {
-        if (!job.IsValid())
-        {
-            allJobs.Remove(job);
-            return false;
-        }
-        if (!job.CanPerformWith(actor))
-        {
-            return false;
-        }
-        job.Status = Job.JobStatus.Assigned;
         job.Assignee = actor;
-        actor.CommandRunner.AddCommand(job.CreateCommand(actor));
-        return true;
+        return job.Start();
     }
 }

@@ -15,7 +15,7 @@ public class HaulItemJob : Job
         DisplayName = $"Haul {Item.name} from {Source.name} to {Destination.name}";
     }
 
-    public override ICommand CreateCommand(ActorAI actor)
+    public override CompositeCommand CreateCommand(ActorAI actor)
     {
         IEnumerable<ICommand> commands = new List<ICommand>
         {
