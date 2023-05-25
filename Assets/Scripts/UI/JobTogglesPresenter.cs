@@ -7,6 +7,9 @@ public class JobTogglesPresenter : MonoBehaviour
     [SerializeField]
     private GameObject togglePrefab;
 
+    [SerializeField]
+    private GameObjectGameEvent destroyEvent;
+
     private class ToggleJobPair
     {
         public TogglePresenter Toggle { get; private set; }
@@ -75,5 +78,23 @@ public class JobTogglesPresenter : MonoBehaviour
         {
             toggles[i].SetJob(null);
         }
+    }
+
+    private void OnObjectDestroyed(object sender, GameObject destroyedObject)
+    {
+        if (destroyedObject == JobSource)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    private void OnEnable()
+    {
+        destroyEvent.OnGameEvent += OnObjectDestroyed;
+    }
+
+    private void OnDisable()
+    {
+        destroyEvent.OnGameEvent -= OnObjectDestroyed;
     }
 }
