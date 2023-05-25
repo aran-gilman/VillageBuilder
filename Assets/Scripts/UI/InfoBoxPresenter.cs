@@ -30,6 +30,18 @@ public class InfoBoxPresenter : MonoBehaviour
         }
     }
 
+    public void Toggle()
+    {
+        if (DisplayedObject == null)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(!gameObject.activeSelf);
+        }
+    }
+
     private void OnObjectDestroyed(object sender, GameObject destroyedObject)
     {
         if (destroyedObject == DisplayedObject)

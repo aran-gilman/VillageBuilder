@@ -298,8 +298,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2057813545}
-        m_TargetAssemblyTypeName: ToggleActive, Assembly-CSharp
+      - m_Target: {fileID: 2057813544}
+        m_TargetAssemblyTypeName: InfoBoxPresenter, Assembly-CSharp
         m_MethodName: Toggle
         m_Mode: 1
         m_Arguments:
@@ -379,7 +379,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 205258858}
-  m_LocalRotation: {x: 0.49269885, y: -0.000000029945994, z: 0.000000016955134, w: 0.8701999}
+  m_LocalRotation: {x: 0.49269882, y: 0.000000029945966, z: -0.000000016955122, w: 0.8701999}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1886,7 +1886,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.49269888, y: -0.00000003961482, z: 0.000000022429534, w: 0.8701999}
+  m_LocalRotation: {x: 0.49269882, y: 0.00000005989196, z: -0.00000003391025, w: 0.8701999}
   m_LocalPosition: {x: 0, y: 10, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3718,7 +3718,6 @@ GameObject:
   - component: {fileID: 2057813543}
   - component: {fileID: 2057813542}
   - component: {fileID: 2057813544}
-  - component: {fileID: 2057813545}
   - component: {fileID: 2057813546}
   m_Layer: 5
   m_Name: InfoBox
@@ -3804,18 +3803,6 @@ MonoBehaviour:
   nameElement: {fileID: 242894289}
   shortDescriptionElement: {fileID: 251195241}
   destroyEvent: {fileID: 11400000, guid: 058ee933c293b844e99fc11175f7d7cf, type: 2}
---- !u!114 &2057813545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2057813540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da9fc7e3eb4febc4c805fd3c2ae08169, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2057813546
 MonoBehaviour:
   m_ObjectHideFlags: 0
