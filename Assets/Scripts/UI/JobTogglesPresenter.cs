@@ -49,6 +49,10 @@ public class JobTogglesPresenter : MonoBehaviour
         private void HandleJobCompleted()
         {
             Toggle.IsOn = false;
+            if (!JobDesignation.CanCreateJobs())
+            {
+                SetJob(null);
+            }
         }
     }
     private List<ToggleJobPair> toggles = new List<ToggleJobPair>();
