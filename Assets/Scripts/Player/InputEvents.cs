@@ -12,7 +12,12 @@ public class InputEvents : ScriptableObject
     [SerializeField]
     private FloatGameEvent rotateCameraEvent;
     [SerializeField]
+    private float cameraRotateSensitivity = 50.0f;
+
+    [SerializeField]
     private FloatGameEvent pitchCameraEvent;
+    [SerializeField]
+    private float cameraPitchSensitivity = 50.0f;
 
     [SerializeField]
     private Vector2GameEvent moveCameraEvent;
@@ -61,8 +66,8 @@ public class InputEvents : ScriptableObject
     private void OnRotateCamera(InputAction.CallbackContext ctx)
     {
         Vector2 value = ctx.ReadValue<Vector2>();
-        rotateCameraEvent.Raise(value.x);
-        pitchCameraEvent.Raise(value.y);
+        rotateCameraEvent.Raise(value.x * cameraRotateSensitivity);
+        pitchCameraEvent.Raise(value.y * cameraPitchSensitivity);
     }
 
     private void OnMoveCamera(InputAction.CallbackContext ctx)
