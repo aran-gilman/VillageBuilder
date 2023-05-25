@@ -121,6 +121,9 @@ public class Inventory : MonoBehaviour
     public void Drop(Item item, Transform position)
     {
         int quantity = RemoveAll(item);
-        item.SpawnPile(quantity, position.position, position.rotation);
+        if (quantity > 0)
+        {
+            item.SpawnPile(quantity, position.position, position.rotation);
+        }
     }
 }
