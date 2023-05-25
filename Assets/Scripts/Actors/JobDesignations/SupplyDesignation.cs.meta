@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: edb0a2e751f07944eafbd9cbdb764409
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - jobDispatcher: {fileID: 11400000, guid: 6240129ce8b3ab54390fb9b129c3f67b, type: 2}
+  - destination: {instanceID: 0}
+  - supplyList: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
