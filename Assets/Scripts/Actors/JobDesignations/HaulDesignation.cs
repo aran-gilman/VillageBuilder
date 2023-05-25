@@ -5,7 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(RetrieveItemTarget))]
 public class HaulDesignation : JobDesignation
 {
-    public RetrieveItemTarget Source { get; private set; }
+    private RetrieveItemTarget source;
+    public RetrieveItemTarget Source
+    {
+        get
+        {
+            if (source == null)
+            {
+                source = GetComponent<RetrieveItemTarget>();
+            }
+            return source;
+        }
+    }
 
     public override bool CanCreateJobs()
     {
@@ -26,29 +37,5 @@ public class HaulDesignation : JobDesignation
             jobs.Add(new HaulItemJob(this, destination, item));
         }
         return jobs;
-    }
-
-    private void OnInventoryAdd(Item item, int quantity)
-    {
-        if (!HasActiveJob())
-        {
-            DispatchJob();
-        }
-    }
-
-    private void Awake()
-    {
-        Source = GetComponent<RetrieveItemTarget>();
-    }
-
-    private void OnEnable()
-    {
-        Source.Inventory.OnAdd.AddListener(OnInventoryAdd);
-        DispatchJob();
-    }
-
-    private void OnDisable()
-    {
-        Source.Inventory.OnAdd.RemoveListener(OnInventoryAdd);
     }
 }

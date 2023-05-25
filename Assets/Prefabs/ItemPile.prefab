@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 5427805548237470945}
   - component: {fileID: 5424134402054672945}
   - component: {fileID: 3316872627963598529}
+  - component: {fileID: 2181249576725654948}
   m_Layer: 0
   m_Name: ItemPile
   m_TagString: Untagged
@@ -181,6 +182,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyEvent: {fileID: 11400000, guid: 058ee933c293b844e99fc11175f7d7cf, type: 2}
+  onBeingDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5427805548237470945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +199,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jobDispatcher: {fileID: 11400000, guid: 6240129ce8b3ab54390fb9b129c3f67b, type: 2}
   displayName: Pick Up
+  onAllJobsCompleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &5424134402054672945
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -221,3 +228,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 8191980236950530507}
+--- !u!114 &2181249576725654948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359396949581191665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b70a3d6b37c51459726867d50fe17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
