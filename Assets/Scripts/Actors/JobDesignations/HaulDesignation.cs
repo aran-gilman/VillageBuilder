@@ -34,7 +34,7 @@ public class HaulDesignation : JobDesignation
         IEnumerable<Item> distinctItems = Source.Inventory.ItemStacks.Select(stack => stack.Item).Distinct();
         foreach (Item item in distinctItems)
         {
-            jobs.Add(new HaulItemJob(this, destination, item));
+            jobs.Add(new HaulItemJob(this, source, destination, item, new InventoryCountProvider(source.Inventory, item)));
         }
         return jobs;
     }

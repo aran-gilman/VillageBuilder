@@ -6,27 +6,30 @@ public class HaulItemJob : Job
     public RetrieveItemTarget Source { get; private set; }
     public DepositItemTarget Destination { get; private set; }
     public Item Item { get; private set; }
+    public IProvider<int> Quantity { get; private set; }
 
     private ICommand itemPickUpCommand;
 
-    public HaulItemJob(HaulDesignation owner, DepositItemTarget destination, Item item)
+    public HaulItemJob(JobDesignation owner, RetrieveItemTarget source, DepositItemTarget destination, Item item, IProvider<int> quantity)
     {
         Owner = owner;
-        Source = owner.Source;
+        Source = source;
         Destination = destination;
         Item = item;
         DisplayName = $"Haul {Item.name} from {Source.name} to {Destination.name}";
+        Quantity = quantity;
     }
 
     public override CompositeCommand CreateCommand(ActorAI actor)
     {
-        itemPickUpCommand = new TransferItemsCommand(Source.Inventory, actor.Inventory, Item);
+        TransferItemsCommand cmd = new TransferItemsCommand(Source.Inventory, actor.Inventory, Item, Quantity);
+        itemPickUpCommand = cmd;
         IEnumerable<ICommand> commands = new List<ICommand>
         {
             new ApproachCommand(actor.NavMeshAgent, Source.transform),
             itemPickUpCommand,
             new ApproachCommand(actor.NavMeshAgent, Destination.transform),
-            new TransferItemsCommand(actor.Inventory, Destination.Inventory, Item)
+            new TransferItemsCommand(actor.Inventory, Destination.Inventory, Item, cmd.TransferResult)
         };
         return new CompositeCommand(commands);
     }

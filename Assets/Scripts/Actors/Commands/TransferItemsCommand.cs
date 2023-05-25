@@ -5,6 +5,14 @@ public class TransferItemsCommand : ICommand
     public Item Item { get; private set; }
     public IProvider<int> Quantity { get; private set; }
 
+    public class TransferResultProvider : IProvider<int>
+    {
+        public int Value { get; set; }
+
+        public int Get() => Value;
+    }
+    public TransferResultProvider TransferResult { get; } = new TransferResultProvider();
+
     public TransferItemsCommand(Inventory source, Inventory destination, Item item, IProvider<int> quantity = null)
     {
         Destination = destination;
@@ -28,6 +36,7 @@ public class TransferItemsCommand : ICommand
         {
             int actualQuantity = Source.Remove(Item, Quantity.Get());
             Destination.Add(Item, actualQuantity);
+            TransferResult.Value = actualQuantity;
         }
         return ICommand.State.Stopped;
     }
