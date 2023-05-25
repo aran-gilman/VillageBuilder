@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 59b70a3d6b37c51459726867d50fe17d
+guid: a08aca620c1e15e41850661412bcaab5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - uiControlPrefab: {fileID: 2851177662958658651, guid: d2d8dbe5ef3bd3c4d9125aa13415a196, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

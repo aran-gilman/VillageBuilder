@@ -73,7 +73,10 @@ public class JobTogglesPresenter : MonoBehaviour
         set
         {
             jobSource = value;
-            UpdateJobDisplay();
+            if (gameObject.activeSelf)
+            {
+                UpdateJobDisplay();
+            }
         }
     }
 
@@ -105,5 +108,10 @@ public class JobTogglesPresenter : MonoBehaviour
         {
             toggles[i].SetJob(null);
         }
+    }
+
+    private void OnEnable()
+    {
+        UpdateJobDisplay();
     }
 }

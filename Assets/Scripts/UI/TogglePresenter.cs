@@ -40,6 +40,12 @@ public class TogglePresenter : MonoBehaviour
     private Button button;
     private bool isOn;
 
+    // Explicit setter for use with programmatically registering a listener with a UnityEvent
+    public void SetValue(bool newValue)
+    {
+        IsOn = newValue;
+    }
+
     public void SetLabel(string text)
     {
         labelDisplay.text = text;

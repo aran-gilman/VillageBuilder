@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectSetting : MonoBehaviour
+public abstract class ObjectSetting : MonoBehaviour
 {
+    public abstract void InstantiateControl(Transform parent);
 }

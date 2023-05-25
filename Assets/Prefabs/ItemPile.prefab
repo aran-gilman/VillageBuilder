@@ -240,3 +240,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b70a3d6b37c51459726867d50fe17d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultValue: 1
+  onValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  uiControlPrefab: {fileID: 2851177662958658651, guid: d2d8dbe5ef3bd3c4d9125aa13415a196, type: 3}
+  displayName: Auto-Haul
