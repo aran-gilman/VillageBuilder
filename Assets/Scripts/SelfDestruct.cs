@@ -13,7 +13,7 @@ public class SelfDestruct : MonoBehaviour
     {
         if (toDestroy == gameObject)
         {
-            onBeingDestroyed.Invoke();
+            onBeingDestroyed?.Invoke();
             Destroy(gameObject);
         }
     }

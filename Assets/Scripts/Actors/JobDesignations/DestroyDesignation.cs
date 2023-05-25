@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DestroyDesignation : JobDesignation
@@ -5,13 +6,16 @@ public class DestroyDesignation : JobDesignation
     [SerializeField]
     private GameObjectGameEvent destroyEvent;
 
-    public override bool CanCreateJob()
+    public override bool CanCreateJobs()
     {
         return true;
     }
 
-    protected override Job CreateJob()
+    protected override List<Job> CreateJobs()
     {
-        return new DestroyJob(this, destroyEvent);
+        return new List<Job>()
+        {
+            new DestroyJob(this, destroyEvent)
+        };
     }
 }

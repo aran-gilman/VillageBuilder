@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class JobDesignation : MonoBehaviour
 {
@@ -7,31 +10,46 @@ public abstract class JobDesignation : MonoBehaviour
 
     [SerializeField]
     protected string displayName;
-
     public string DisplayName => displayName;
 
-    public Job CurrentJob { get; private set; }
+    [SerializeField]
+    private UnityEvent onAllJobsCompleted;
+    public UnityEvent OnAllJobsCompleted => onAllJobsCompleted;
 
+    private List<Job> currentJobs = new List<Job>();
+    public IEnumerable<Job> CurrentJobs => currentJobs;
+
+    public abstract bool CanCreateJobs();
+    protected abstract List<Job> CreateJobs();
+
+    public bool HasActiveJob()
+    {
+        return currentJobs.Count > 0;
+    }
+
+    // TODO: Check for any missing or inactive jobs and re-dispatch/activate them if necessary
     public void DispatchJob()
     {
-        if (CurrentJob != null)
+        if (currentJobs.Count > 0)
         {
             return;
         }
-        CurrentJob = CreateJob();
-        if (CurrentJob != null)
+        currentJobs = CreateJobs();
+        foreach (Job job in currentJobs)
         {
-            CurrentJob.OnJobCompleted += HandleJobCompleted;
-            jobDispatcher.DispatchJob(CurrentJob);
+            job.OnJobCompleted += HandleJobCompleted;
+            jobDispatcher.DispatchJob(job);
         }
     }
 
-    public abstract bool CanCreateJob();
-    protected abstract Job CreateJob();
-
     private void HandleJobCompleted(object sender, object args)
     {
-        CurrentJob.OnJobCompleted -= HandleJobCompleted;
-        CurrentJob = null;
+        Job job = (Job)sender;
+        job.OnJobCompleted -= HandleJobCompleted;
+        if (!currentJobs.Any(j => j.Status != Job.JobStatus.Completed))
+        {
+            onAllJobsCompleted.Invoke();
+            currentJobs.Clear();
+        }
     }
 }

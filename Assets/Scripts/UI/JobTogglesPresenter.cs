@@ -24,19 +24,16 @@ public class JobTogglesPresenter : MonoBehaviour
         public void SetJob(JobDesignation newJob)
         {
             Toggle.gameObject.SetActive(newJob != null);
-            if (JobDesignation != null && JobDesignation.CurrentJob != null)
+            if (JobDesignation != null)
             {
-                JobDesignation.CurrentJob.OnJobCompleted -= HandleJobCompleted;
+                JobDesignation.OnAllJobsCompleted.RemoveListener(HandleJobCompleted);
             }
             JobDesignation = newJob;
             if (newJob != null)
             {
                 Toggle.SetLabel(newJob.DisplayName);
-                Toggle.IsOn = JobDesignation.CurrentJob != null;
-                if (JobDesignation.CurrentJob != null)
-                {
-                    JobDesignation.CurrentJob.OnJobCompleted += HandleJobCompleted;
-                }
+                Toggle.IsOn = JobDesignation.HasActiveJob();
+                JobDesignation.OnAllJobsCompleted.AddListener(HandleJobCompleted);
             }
         }
 
@@ -45,21 +42,12 @@ public class JobTogglesPresenter : MonoBehaviour
             if (!currentValue && JobDesignation != null)
             {
                 JobDesignation.DispatchJob();
-                if (JobDesignation.CurrentJob != null)
-                {
-                    JobDesignation.CurrentJob.OnJobCompleted += HandleJobCompleted;
-                    Toggle.IsOn = true;
-                }
-                else
-                {
-                    Toggle.IsOn = false;
-                }
+                Toggle.IsOn = JobDesignation.HasActiveJob();
             }
         }
 
-        private void HandleJobCompleted(object sender, object args)
+        private void HandleJobCompleted()
         {
-            ((Job)sender).OnJobCompleted -= HandleJobCompleted;
             Toggle.IsOn = false;
         }
     }
@@ -87,7 +75,7 @@ public class JobTogglesPresenter : MonoBehaviour
         int numJobsDisplayed = 0;
         for (int i = 0; i < jobDesignations.Length; i++)
         {
-            if (jobDesignations[i].CanCreateJob())
+            if (jobDesignations[i].CanCreateJobs())
             {
                 if (toggles.Count == i)
                 {

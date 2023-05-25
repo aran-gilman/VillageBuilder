@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(RetrieveItemTarget))]
@@ -5,29 +7,30 @@ public class HaulDesignation : JobDesignation
 {
     public RetrieveItemTarget Source { get; private set; }
 
-    public override bool CanCreateJob()
+    public override bool CanCreateJobs()
     {
         return Source.Inventory.ItemStacks.Count > 0 && FindObjectOfType<DepositItemTarget>() != null;
     }
 
-    protected override Job CreateJob()
+    protected override List<Job> CreateJobs()
     {
-        if (Source.Inventory.ItemStacks.Count == 0)
-        {
-            return null;
-        }
-        Item item = Source.Inventory.ItemStacks[0].Item;
+        List<Job> jobs = new List<Job>();
         DepositItemTarget destination = FindObjectOfType<DepositItemTarget>();
         if (destination == null)
         {
-            return null;
+            return jobs;
         }
-        return new HaulItemJob(this, destination, item);
+        IEnumerable<Item> distinctItems = Source.Inventory.ItemStacks.Select(stack => stack.Item).Distinct();
+        foreach (Item item in distinctItems)
+        {
+            jobs.Add(new HaulItemJob(this, destination, item));
+        }
+        return jobs;
     }
 
     private void OnInventoryAdd(Item item, int quantity)
     {
-        if (CurrentJob == null)
+        if (!HasActiveJob())
         {
             DispatchJob();
         }
