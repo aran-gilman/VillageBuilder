@@ -12,6 +12,7 @@ public class JobDispatcher : ScriptableObject
     public void DispatchJob(Job job)
     {
         job.Status = Job.JobStatus.Available;
+        job.OnJobCompleted += HandleJobCompleted;
         allJobs.Add(job);
     }
 
@@ -25,5 +26,12 @@ public class JobDispatcher : ScriptableObject
     {
         job.Assignee = actor;
         return job.Start();
+    }
+
+    private void HandleJobCompleted(object sender, object args)
+    {
+        Job job = (Job)sender;
+        job.OnJobCompleted -= HandleJobCompleted;
+        allJobs.Remove(job);
     }
 }
