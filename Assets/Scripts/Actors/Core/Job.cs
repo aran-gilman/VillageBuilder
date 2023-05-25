@@ -19,6 +19,10 @@ public abstract class Job
 
     private CompositeCommand command;
 
+    public abstract bool CanPerformWith(ActorAI actor);
+    public abstract bool IsValid();
+    public abstract CompositeCommand CreateCommand(ActorAI actor);
+
     public bool Start()
     {
         if (!IsValid() || !CanPerformWith(Assignee))
@@ -32,9 +36,10 @@ public abstract class Job
         return true;
     }
 
-    public abstract bool CanPerformWith(ActorAI actor);
-    public abstract bool IsValid();
-    public abstract CompositeCommand CreateCommand(ActorAI actor);
+    public virtual void Cancel()
+    {
+        Assignee.CommandRunner.StopCurrentCommand();
+    }
 
     private void HandleCommandFinished(object sender, object args)
     {

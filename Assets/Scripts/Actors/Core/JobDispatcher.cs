@@ -16,12 +16,6 @@ public class JobDispatcher : ScriptableObject
         allJobs.Add(job);
     }
 
-    public void Cancel(Job job)
-    {
-        allJobs.Remove(job);
-        job.Assignee.CommandRunner.StopCurrentCommand();
-    }
-
     public bool AssignJob(Job job, ActorAI actor)
     {
         job.Assignee = actor;

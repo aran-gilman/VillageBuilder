@@ -21,7 +21,7 @@ public class JobDispatcherEditor : Editor
                 EditorGUILayout.LabelField(job.DisplayName);
                 if(GUILayout.Button("Cancel"))
                 {
-                    jobDispatcher.Cancel(job);
+                    job.Cancel();
                 }
                 EditorGUILayout.EndHorizontal();
             }
