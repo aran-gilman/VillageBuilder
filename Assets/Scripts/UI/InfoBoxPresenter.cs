@@ -14,22 +14,25 @@ public class InfoBoxPresenter : MonoBehaviour
 
     private GameObject displayedObject;
 
-    public void Show(GameObject toDisplay)
-    {
-        IInfoBoxModel model = toDisplay.GetComponent<IInfoBoxModel>();
-        if (model == null)
+    public GameObject DisplayedObject
+    { 
+        get => displayedObject;
+        set
         {
-            return;
+            if (!value.TryGetComponent<IInfoBoxModel>(out var model))
+            {
+                displayedObject = null;
+                return;
+            }
+            displayedObject = value;
+            nameElement.text = model.DisplayName;
+            shortDescriptionElement.text = model.ShortDescription;
         }
-        displayedObject = toDisplay;
-        nameElement.text = model.DisplayName;
-        shortDescriptionElement.text = model.ShortDescription;
-        gameObject.SetActive(true);
     }
 
     private void OnObjectDestroyed(object sender, GameObject destroyedObject)
     {
-        if (destroyedObject == displayedObject)
+        if (destroyedObject == DisplayedObject)
         {
             gameObject.SetActive(false);
         }
