@@ -867,7 +867,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ec61091d6a530408ce5f23c341ea02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemStacks: []
+  itemStacks:
+  - Item: {fileID: 11400000, guid: 3c567829084531e4a9377de67b0fa27d, type: 2}
+    Quantity: 20
   onAdd:
     m_PersistentCalls:
       m_Calls: []

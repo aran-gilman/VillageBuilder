@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c355938a542132c45b383dff5c4c4144, type: 3}
   m_Name: HouseConstructionSupplies
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - Item: {fileID: 11400000, guid: c158c6c77d0e0494fbb56423c625f2c8, type: 2}
+    Quantity: 5
+  - Item: {fileID: 11400000, guid: 3c567829084531e4a9377de67b0fa27d, type: 2}
+    Quantity: 5
