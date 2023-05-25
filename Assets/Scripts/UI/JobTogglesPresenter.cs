@@ -75,7 +75,7 @@ public class JobTogglesPresenter : MonoBehaviour
         int numJobsDisplayed = 0;
         for (int i = 0; i < jobDesignations.Length; i++)
         {
-            if (jobDesignations[i].CanCreateJobs())
+            if (jobDesignations[i].CanCreateJobs() || jobDesignations[i].HasActiveJob())
             {
                 if (toggles.Count == i)
                 {
