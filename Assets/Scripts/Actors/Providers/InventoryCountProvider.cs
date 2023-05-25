@@ -2,10 +2,18 @@ using UnityEngine.Assertions;
 
 public class InventoryCountProvider : IProvider<int>
 {
-    public Inventory Inventory { get; private set; }
-    public Item Item { get; private set; }
+    public IProvider<Inventory> Inventory { get; private set; }
+    public IProvider<Item> Item { get; private set; }
 
     public InventoryCountProvider(Inventory inventory, Item item)
+    {
+        Assert.IsNotNull(inventory, "inventory must be non-null");
+        Assert.IsNotNull(item, "item must be non-null");
+        Inventory = new ConstProvider<Inventory>(inventory);
+        Item = new ConstProvider<Item>(item);
+    }
+
+    public InventoryCountProvider(IProvider<Inventory> inventory, IProvider<Item> item)
     {
         Assert.IsNotNull(inventory, "inventory must be non-null");
         Assert.IsNotNull(item, "item must be non-null");
@@ -16,10 +24,12 @@ public class InventoryCountProvider : IProvider<int>
     public int Get()
     {
         // In case Inventory gets destroyed in between provider creation and now
-        if (Inventory == null)
+        Inventory inventory = Inventory.Get();
+        Item item = Item.Get();
+        if (inventory == null || item == null)
         {
             return 0;
         }
-        return Inventory.Count(Item);
+        return inventory.Count(item);
     }
 }
