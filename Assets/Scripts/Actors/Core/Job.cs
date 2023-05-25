@@ -38,11 +38,16 @@ public abstract class Job
 
     public virtual void Cancel()
     {
-        if (Assignee == null || Status != JobStatus.Started)
+        if (Assignee != null && Status == JobStatus.Started)
         {
-            return;
+            Assignee.CommandRunner.StopCurrentCommand();
         }
-        Assignee.CommandRunner.StopCurrentCommand();
+        else
+        {
+            // TODO: Properly implement inactive and/or canceled status
+            Status = JobStatus.Completed;
+            OnJobCompleted?.Invoke(this, null);
+        }
     }
 
     private void HandleCommandFinished(object sender, object args)

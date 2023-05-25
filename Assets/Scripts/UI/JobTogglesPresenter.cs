@@ -46,6 +46,7 @@ public class JobTogglesPresenter : MonoBehaviour
                 {
                     job.Cancel();
                 }
+                Toggle.IsOn = JobDesignation.HasActiveJob(); 
             }
             else
             {

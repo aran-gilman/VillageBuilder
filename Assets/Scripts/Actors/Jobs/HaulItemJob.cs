@@ -43,11 +43,7 @@ public class HaulItemJob : Job
 
     public override void Cancel()
     {
-        if (Assignee == null || Status != JobStatus.Started)
-        {
-            return;
-        }
+        base.Cancel();
         Assignee.Inventory.Drop(Item, Assignee.transform);
-        Assignee.CommandRunner.StopCurrentCommand();
     }
 }
