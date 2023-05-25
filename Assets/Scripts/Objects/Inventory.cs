@@ -111,11 +111,16 @@ public class Inventory : MonoBehaviour
 
     public void DropAll(Transform position)
     {
-        List<GameObject> itemPiles = new List<GameObject>();
         foreach (ItemStack stack in itemStacks)
         {
-            itemPiles.Add(stack.Item.SpawnPile(stack.Quantity, position.position, transform.rotation));
+            stack.Item.SpawnPile(stack.Quantity, position.position, position.rotation);
         }
         itemStacks.Clear();
+    }
+
+    public void Drop(Item item, Transform position)
+    {
+        int quantity = RemoveAll(item);
+        item.SpawnPile(quantity, position.position, position.rotation);
     }
 }

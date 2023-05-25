@@ -40,4 +40,10 @@ public class HaulItemJob : Job
         isValid &= Source.Inventory.Count(Item) > 0;
         return isValid;
     }
+
+    public override void Cancel()
+    {
+        Assignee.Inventory.Drop(Item, Assignee.transform);
+        base.Cancel();
+    }
 }
