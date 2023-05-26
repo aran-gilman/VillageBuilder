@@ -8,7 +8,7 @@ public class SupplyJob : Job
     public IProvider<Item> Item { get; private set; }
     public IProvider<int> TargetQuantity { get; private set; }
 
-    private ICommand itemPickUpCommand;
+    private TransferItemsCommand itemPickUpCommand;
     private CompositeCommand haulCommand;
 
     public SupplyJob(JobDesignation owner, IProvider<Inventory> source, IProvider<Inventory> destination, IProvider<Item> item, IProvider<int> targetQuantity)
@@ -27,12 +27,11 @@ public class SupplyJob : Job
         IProvider<int> inventoryCount = new InventoryCountProvider(Destination, Item);
 
         ApproachCommand approachSourceCommand = new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(Source));
-        TransferItemsCommand cmd = new TransferItemsCommand(
+        itemPickUpCommand = new TransferItemsCommand(
             new ComponentProvider<Inventory>(approachSourceCommand.CachedTarget),
             actorInventoryProvider,
             Item,
             new IntDifference(TargetQuantity, inventoryCount));
-        itemPickUpCommand = cmd;
 
         ApproachCommand approachDestinationCommand = new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(Destination));
 
@@ -41,7 +40,11 @@ public class SupplyJob : Job
             approachSourceCommand,
             itemPickUpCommand,
             approachDestinationCommand,
-            new TransferItemsCommand(actorInventoryProvider, new ComponentProvider<Inventory>(approachDestinationCommand.CachedTarget), cmd.ActualItem, cmd.ActualQuantity)
+            new TransferItemsCommand(
+                actorInventoryProvider,
+                new ComponentProvider<Inventory>(approachDestinationCommand.CachedTarget),
+                itemPickUpCommand.ActualItem,
+                itemPickUpCommand.ActualQuantity)
         };
         haulCommand = new CompositeCommand(commands);
         RepeatCommand repeated = new RepeatCommand(haulCommand, new IsEqualProvider<int>(inventoryCount, TargetQuantity));
@@ -69,9 +72,9 @@ public class SupplyJob : Job
     public override void Cancel()
     {
         base.Cancel();
-        if (Item.Get() != null && haulCommand.CommandRunner.History.Contains(itemPickUpCommand))
+        if (haulCommand != null && itemPickUpCommand.ActualItem.Get() != null && haulCommand.CommandRunner.History.Contains(itemPickUpCommand))
         {
-            Assignee.Inventory.Drop(Item.Get(), Assignee.transform);
+            Assignee.Inventory.Drop(itemPickUpCommand.ActualItem.Get(), Assignee.transform);
         }
     }
 }
