@@ -3,14 +3,14 @@ using System.Linq;
 
 public class HaulItemJob : Job
 {
-    public IProvider<RetrieveItemTarget> Source { get; private set; }
-    public IProvider<DepositItemTarget> Destination { get; private set; }
+    public IProvider<Inventory> Source { get; private set; }
+    public IProvider<Inventory> Destination { get; private set; }
     public IProvider<Item> Item { get; private set; }
     public IProvider<int> Quantity { get; private set; }
 
     private ICommand itemPickUpCommand;
 
-    public HaulItemJob(JobDesignation owner, IProvider<RetrieveItemTarget> source, IProvider<DepositItemTarget> destination, IProvider<Item> item, IProvider<int> quantity)
+    public HaulItemJob(JobDesignation owner, IProvider<Inventory> source, IProvider<Inventory> destination, IProvider<Item> item, IProvider<int> quantity)
     {
         Owner = owner;
         Source = source;
@@ -23,14 +23,14 @@ public class HaulItemJob : Job
     public override CompositeCommand CreateCommand(ActorAI actor)
     {
         IProvider<Inventory> actorInventoryProvider = new ConstProvider<Inventory>(actor.Inventory);
-        TransferItemsCommand cmd = new TransferItemsCommand(new ConstProvider<Inventory>(Source.Get().Inventory), actorInventoryProvider, Item, Quantity);
+        TransferItemsCommand cmd = new TransferItemsCommand(Source, actorInventoryProvider, Item, Quantity);
         itemPickUpCommand = cmd;
         IEnumerable<ICommand> commands = new List<ICommand>
         {
             new ApproachCommand(actor.NavMeshAgent, Source.Get().transform),
             itemPickUpCommand,
             new ApproachCommand(actor.NavMeshAgent, Destination.Get().transform),
-            new TransferItemsCommand(actorInventoryProvider, new ConstProvider<Inventory>(Destination.Get().Inventory), Item, cmd.TransferResult)
+            new TransferItemsCommand(actorInventoryProvider, Destination, Item, cmd.TransferResult)
         };
         return new CompositeCommand(commands);
     }
@@ -50,7 +50,7 @@ public class HaulItemJob : Job
         {
             return false;
         }
-        return Source.Get().Inventory.Count(Item.Get()) > 0;
+        return Source.Get().Count(Item.Get()) > 0;
     }
 
     public override void Cancel()

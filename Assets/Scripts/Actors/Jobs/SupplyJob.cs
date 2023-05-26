@@ -3,7 +3,7 @@ using System.Linq;
 
 public class SupplyJob : Job
 {
-    public IProvider<RetrieveItemTarget> Source { get; private set; }
+    public IProvider<Inventory> Source { get; private set; }
     public IProvider<Inventory> Destination { get; private set; }
     public IProvider<Item> Item { get; private set; }
     public IProvider<int> TargetQuantity { get; private set; }
@@ -11,7 +11,7 @@ public class SupplyJob : Job
     private ICommand itemPickUpCommand;
     private CompositeCommand haulCommand;
 
-    public SupplyJob(JobDesignation owner, IProvider<RetrieveItemTarget> source, IProvider<Inventory> destination, IProvider<Item> item, IProvider<int> targetQuantity)
+    public SupplyJob(JobDesignation owner, IProvider<Inventory> source, IProvider<Inventory> destination, IProvider<Item> item, IProvider<int> targetQuantity)
     {
         Owner = owner;
         Source = source;
@@ -26,7 +26,7 @@ public class SupplyJob : Job
         IProvider<Inventory> actorInventoryProvider = new ConstProvider<Inventory>(actor.Inventory);
         IProvider<int> inventoryCount = new InventoryCountProvider(Destination, Item);
         TransferItemsCommand cmd = new TransferItemsCommand(
-            new ConstProvider<Inventory>(Source.Get().Inventory),
+            Source,
             actorInventoryProvider,
             Item,
             new IntDifference(TargetQuantity, inventoryCount));
@@ -58,7 +58,7 @@ public class SupplyJob : Job
         {
             return false;
         }
-        return Source.Get().Inventory.Count(Item.Get()) > 0;
+        return Source.Get().Count(Item.Get()) > 0;
     }
 
     public override void Cancel()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NearestItemSource : IProvider<RetrieveItemTarget>
+public class NearestItemSource : IProvider<Inventory>
 {
     public IProvider<Vector3> Position { get; private set; }
     public IProvider<Item> Item { get; private set; }
@@ -11,7 +11,7 @@ public class NearestItemSource : IProvider<RetrieveItemTarget>
         Item = item;
     }
 
-    public RetrieveItemTarget Get()
+    public Inventory Get()
     {
         Item item = Item.Get();
         Vector3 position = Position.Get();
@@ -35,6 +35,6 @@ public class NearestItemSource : IProvider<RetrieveItemTarget>
                 }
             }
         }
-        return nearest;
+        return nearest.Inventory;
     }
 }
