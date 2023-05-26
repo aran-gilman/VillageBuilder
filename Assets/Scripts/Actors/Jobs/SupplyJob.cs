@@ -53,17 +53,17 @@ public class SupplyJob : Job
         return actor.NavMeshAgent != null && actor.Inventory != null;
     }
 
-    public override bool IsValid()
+    public override ValidationResult IsValid()
     {
-        if (Item.Get() == null || Source.Get() == null || Destination.Get() == null)
+        if (Item.Get() == null || Destination.Get() == null || !Destination.Get().gameObject.activeSelf)
         {
-            return false;
+            return ValidationResult.Impossible;
         }
-        if (!Source.Get().gameObject.activeSelf || !Destination.Get().gameObject.activeSelf)
+        if (Source.Get() == null || !Source.Get().gameObject.activeSelf || Source.Get().Count(Item.Get()) == 0)
         {
-            return false;
+            return ValidationResult.Wait;
         }
-        return Source.Get().Count(Item.Get()) > 0;
+        return ValidationResult.Valid;
     }
 
     public override void Cancel()

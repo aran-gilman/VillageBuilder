@@ -29,8 +29,8 @@ public class DestroyJob : Job
         return new CompositeCommand(commands);
     }
 
-    public override bool IsValid()
+    public override ValidationResult IsValid()
     {
-        return Owner != null;
+        return Owner == null ? ValidationResult.Impossible : ValidationResult.Valid;
     }
 }

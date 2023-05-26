@@ -19,16 +19,39 @@ public abstract class Job
 
     protected CompositeCommand command;
 
+    public enum ValidationResult
+    {
+        Valid,
+        Wait,
+        Impossible
+    }
+    public abstract ValidationResult IsValid();
+
     public abstract bool CanPerformWith(ActorAI actor);
-    public abstract bool IsValid();
     public abstract CompositeCommand CreateCommand(ActorAI actor);
 
     public bool Start()
     {
-        if (!IsValid() || !CanPerformWith(Assignee))
+        ValidationResult isValid = IsValid();
+        if (isValid == ValidationResult.Impossible)
         {
+            Cancel();
             return false;
         }
+
+        if (isValid == ValidationResult.Wait)
+        {
+            // TODO: Set up callbacks in JobDesignation to try re-activating the job when conditions are met
+            Status = JobStatus.Inactive;
+            return false;
+        }
+
+        if (!CanPerformWith(Assignee))
+        {
+            Assignee = null;
+            return false;
+        }
+
         Status = JobStatus.Started;
         command = CreateCommand(Assignee);
         command.CommandRunner.OnBecomeIdle += HandleCommandFinished;
