@@ -20,13 +20,16 @@ public class SupplyDesignation : JobDesignation
         IProvider<Inventory> inventoryProvider = new ConstProvider<Inventory>(destination);
         foreach (ItemStack stack in supplyList.Items)
         {
-            IProvider<Item> itemProvider = new ConstProvider<Item>(stack.Item);
-            jobs.Add(new SupplyJob(
-                this,
-                new NearestItemSource(new TransformProvider<Inventory>(inventoryProvider), itemProvider),
-                inventoryProvider,
-                itemProvider,
-                new ConstProvider<int>(stack.Quantity)));
+            if (destination.Count(stack.Item) < stack.Quantity)
+            {
+                IProvider<Item> itemProvider = new ConstProvider<Item>(stack.Item);
+                jobs.Add(new SupplyJob(
+                    this,
+                    new NearestItemSource(new TransformProvider<Inventory>(inventoryProvider), itemProvider),
+                    inventoryProvider,
+                    itemProvider,
+                    new ConstProvider<int>(stack.Quantity)));
+            }
         }
         return jobs;
     }
