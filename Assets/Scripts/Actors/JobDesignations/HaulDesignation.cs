@@ -36,7 +36,8 @@ public class HaulDesignation : JobDesignation
         IProvider<Inventory> destinationProvider = new ConstProvider<Inventory>(destination.Inventory);
         foreach (Item item in distinctItems)
         {
-            jobs.Add(new HaulItemJob(this, sourceProvider, destinationProvider, new ConstProvider<Item>(item), new InventoryCountProvider(source.Inventory, item)));
+            IProvider<Item> itemProvider = new ConstProvider<Item>(item);
+            jobs.Add(new HaulItemJob(this, sourceProvider, destinationProvider, itemProvider, new InventoryCountProvider(sourceProvider, itemProvider)));
         }
         return jobs;
     }
