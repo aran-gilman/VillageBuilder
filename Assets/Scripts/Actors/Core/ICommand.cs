@@ -3,7 +3,8 @@ public interface ICommand
     public enum State
     {
         Running,
-        Stopped
+        Stopped,
+        Invalid
     }
 
     void Init() { }

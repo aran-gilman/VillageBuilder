@@ -19,12 +19,20 @@ public class TransferItemsCommand : ICommand
     public ICommand.State Execute()
     {
         int quantityToRetrieve = Quantity.Get();
-        if (quantityToRetrieve > 0)
+        Item item = Item.Get();
+        Inventory source = Source.Get();
+        Inventory destination = Destination.Get();
+        if (quantityToRetrieve <= 0 || item == null || source == null || destination == null)
         {
-            int actualQuantity = Source.Get().Remove(Item.Get(), Quantity.Get());
-            Destination.Get().Add(Item.Get(), actualQuantity);
-            transferResult.Value = actualQuantity;
+            return ICommand.State.Invalid;
         }
+        int actualQuantity = source.Remove(item, quantityToRetrieve);
+        transferResult.Value = actualQuantity;
+        if (actualQuantity <= 0)
+        {
+            return ICommand.State.Invalid;
+        }
+        destination.Add(item, actualQuantity);
         return ICommand.State.Stopped;
     }
 }

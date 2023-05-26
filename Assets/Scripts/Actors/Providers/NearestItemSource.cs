@@ -35,6 +35,10 @@ public class NearestItemSource : IProvider<Inventory>
                 }
             }
         }
-        return nearest.Inventory;
+        if (nearest != null)
+        {
+            return nearest.Inventory;
+        }
+        return null;
     }
 }

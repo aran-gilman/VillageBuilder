@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class CommandRunner
 {
     public event EventHandler OnBecomeIdle;
+    public event EventHandler OnInvalidCommand;
 
     public bool IsIdle => queue.Count == 0;
 
@@ -53,9 +54,22 @@ public class CommandRunner
 
     public void Run()
     {
-        if (queue.Count > 0 && queue[0].Execute() == ICommand.State.Stopped)
+        if (queue.Count == 0)
         {
-            Next();
+            return;
+        }
+        ICommand.State state = queue[0].Execute();
+        switch (state)
+        {
+            case ICommand.State.Running:
+                break;
+            case ICommand.State.Stopped:
+                Next();
+                break;
+            case ICommand.State.Invalid:
+                OnInvalidCommand?.Invoke(this, null);
+                Next();
+                break;
         }
     }
 
@@ -66,6 +80,10 @@ public class CommandRunner
 
     private void Next()
     {
+        if (queue.Count == 0)
+        {
+            return;
+        }
         history.Add(queue[0]);
         queue.RemoveAt(0);
         if (queue.Count > 0)

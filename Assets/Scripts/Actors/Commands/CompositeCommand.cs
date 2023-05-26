@@ -21,11 +21,19 @@ public class CompositeCommand : ICommand
     {
         CommandRunner.ClearCommands();
         CommandRunner.ClearHistory();
+
+        CommandRunner.OnInvalidCommand += HandleInvalidCommand;
         CommandRunner.AddCommands(Commands);
     }
 
     public void Cancel()
     {
         CommandRunner.ClearCommands();
+    }
+
+    private void HandleInvalidCommand(object sender, object args)
+    {
+        CommandRunner.OnInvalidCommand -= HandleInvalidCommand;
+        Cancel();
     }
 }
