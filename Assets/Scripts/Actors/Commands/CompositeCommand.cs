@@ -19,6 +19,8 @@ public class CompositeCommand : ICommand
 
     public void Init()
     {
+        CommandRunner.ClearCommands();
+        CommandRunner.ClearHistory();
         CommandRunner.AddCommands(Commands);
     }
 
