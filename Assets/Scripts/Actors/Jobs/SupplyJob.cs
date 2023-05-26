@@ -17,7 +17,7 @@ public class SupplyJob : Job
         Source = source;
         Destination = destination;
         Item = item;
-        DisplayName = $"Supply items";
+        DisplayName = $"Supply {Item.Get().name} to {Destination.Get().name}";
         TargetQuantity = targetQuantity;
     }
 

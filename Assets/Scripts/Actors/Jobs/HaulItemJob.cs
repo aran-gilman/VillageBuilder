@@ -16,7 +16,7 @@ public class HaulItemJob : Job
         Source = source;
         Destination = destination;
         Item = item;
-        DisplayName = $"Haul item";
+        DisplayName = $"Haul {Item.Get().name} to storage";
         Quantity = quantity;
     }
 
