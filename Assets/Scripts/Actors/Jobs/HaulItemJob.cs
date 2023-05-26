@@ -56,7 +56,7 @@ public class HaulItemJob : Job
     public override void Cancel()
     {
         base.Cancel();
-        if (Item.Get() != null && command.CommandRunner.History.Contains(itemPickUpCommand))
+        if (command != null && Item.Get() != null && command.CommandRunner.History.Contains(itemPickUpCommand))
         {
             Assignee.Inventory.Drop(Item.Get(), Assignee.transform);
         }
