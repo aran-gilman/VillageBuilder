@@ -6,9 +6,6 @@ using UnityEngine.Events;
 public abstract class JobDesignation : MonoBehaviour
 {
     [SerializeField]
-    protected JobDispatcher jobDispatcher;
-
-    [SerializeField]
     protected string displayName;
     public string DisplayName => displayName;
 
@@ -38,7 +35,7 @@ public abstract class JobDesignation : MonoBehaviour
         foreach (Job job in currentJobs)
         {
             job.OnJobCompleted += HandleJobCompleted;
-            jobDispatcher.DispatchJob(job);
+            JobDispatcher.Get().DispatchJob(job);
         }
     }
 

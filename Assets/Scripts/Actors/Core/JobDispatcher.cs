@@ -1,10 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
-[CreateAssetMenu]
-public class JobDispatcher : ScriptableObject
+public class JobDispatcher
 {
+    private static JobDispatcher instance;
+    public static JobDispatcher Get()
+    {
+        if (instance == null)
+        {
+            instance = new JobDispatcher();
+        }
+        return instance;
+    }
+
     private List<Job> allJobs = new List<Job>();
     public IEnumerable<Job> AllJobs => allJobs;
     public IEnumerable<Job> OpenJobs => allJobs.Where(job => job.Status == Job.JobStatus.Available);
@@ -28,4 +36,6 @@ public class JobDispatcher : ScriptableObject
         job.OnJobCompleted -= HandleJobCompleted;
         allJobs.Remove(job);
     }
+
+    private JobDispatcher() { }
 }
