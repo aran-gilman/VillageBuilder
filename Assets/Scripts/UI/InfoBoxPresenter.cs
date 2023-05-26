@@ -48,7 +48,7 @@ public class InfoBoxPresenter : MonoBehaviour
     {
         if (destroyedObject == DisplayedObject)
         {
-            gameObject.SetActive(false);
+            DisplayedObject = null;
         }
     }
 

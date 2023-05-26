@@ -17,11 +17,17 @@ public class ObjectSettingsPresenter : MonoBehaviour
         }
     }
 
+    public void SetSourceToNull()
+    {
+        Source = null;
+    }
+
     private void UpdateDisplay()
     {
         if (Source == null)
         {
             gameObject.SetActive(false);
+            return;
         }
 
         for (int i = 0; i < transform.childCount; i++)

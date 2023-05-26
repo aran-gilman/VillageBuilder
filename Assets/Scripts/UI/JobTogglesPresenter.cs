@@ -80,11 +80,17 @@ public class JobTogglesPresenter : MonoBehaviour
         }
     }
 
+    public void SetSourceToNull()
+    {
+        JobSource = null;
+    }
+
     private void UpdateJobDisplay()
     {
         if (JobSource == null)
         {
             gameObject.SetActive(false);
+            return;
         }
 
         JobDesignation[] jobDesignations = JobSource.GetComponentsInChildren<JobDesignation>();
