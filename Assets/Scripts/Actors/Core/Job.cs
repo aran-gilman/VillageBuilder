@@ -1,8 +1,11 @@
 using System;
+using UnityEngine;
 
 public abstract class Job
 {
     public event EventHandler OnJobCompleted;
+    public event EventHandler OnJobInactive;
+    public event EventHandler OnJobStarted;
 
     public enum JobStatus
     {
@@ -30,33 +33,26 @@ public abstract class Job
     public abstract bool CanPerformWith(ActorAI actor);
     public abstract CompositeCommand CreateCommand(ActorAI actor);
 
-    public bool Start()
+    public void Start()
     {
         ValidationResult isValid = IsValid();
         if (isValid == ValidationResult.Impossible)
         {
             Cancel();
-            return false;
+            return;
         }
 
         if (isValid == ValidationResult.Wait)
         {
-            // TODO: Set up callbacks in JobDesignation to try re-activating the job when conditions are met
             Status = JobStatus.Inactive;
-            return false;
+            OnJobInactive?.Invoke(this, null);
+            return;
         }
-
-        if (!CanPerformWith(Assignee))
-        {
-            Assignee = null;
-            return false;
-        }
-
         Status = JobStatus.Started;
         command = CreateCommand(Assignee);
         command.CommandRunner.OnBecomeIdle += HandleCommandFinished;
         Assignee.CommandRunner.AddCommand(command);
-        return true;
+        OnJobStarted?.Invoke(this, null);
     }
 
     public virtual void Cancel()

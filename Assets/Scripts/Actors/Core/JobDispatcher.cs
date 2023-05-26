@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +14,8 @@ public class JobDispatcher
         return instance;
     }
 
+    public event EventHandler<Job> OnJobDispatched;
+
     private List<Job> allJobs = new List<Job>();
     public IEnumerable<Job> AllJobs => allJobs;
     public IEnumerable<Job> OpenJobs => allJobs.Where(job => job.Status == Job.JobStatus.Available);
@@ -22,12 +25,7 @@ public class JobDispatcher
         job.Status = Job.JobStatus.Available;
         job.OnJobCompleted += HandleJobCompleted;
         allJobs.Add(job);
-    }
-
-    public bool AssignJob(Job job, ActorAI actor)
-    {
-        job.Assignee = actor;
-        return job.Start();
+        OnJobDispatched?.Invoke(this, job);
     }
 
     private void HandleJobCompleted(object sender, object args)

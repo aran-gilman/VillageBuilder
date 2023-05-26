@@ -13,18 +13,38 @@ public class ActorAI : MonoBehaviour
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
         Inventory = GetComponent<Inventory>();
+
+        CommandRunner.OnBecomeIdle += HandleBecomeIdle;
+        JobDispatcher.Get().OnJobDispatched += HandleJobDispatched;
+    }
+
+    private void OnDestroy()
+    {
+        CommandRunner.OnBecomeIdle -= HandleBecomeIdle;
+        JobDispatcher.Get().OnJobDispatched -= HandleJobDispatched;
     }
 
     private void Update()
     {
         CommandRunner.Run();
-        if (CommandRunner.IsIdle)
+    }
+
+    private void HandleBecomeIdle(object sender, object args)
+    {
+        Job job = JobDispatcher.Get().OpenJobs.Where(j => j.CanPerformWith(this)).FirstOrDefault();
+        if (job != null)
         {
-            Job job = JobDispatcher.Get().OpenJobs.FirstOrDefault();
-            if (job != null)
-            {
-                JobDispatcher.Get().AssignJob(job, this);
-            }
+            job.Assignee = this;
+            job.Start();
+        }
+    }
+
+    private void HandleJobDispatched(object sender, Job job)
+    {
+        if (CommandRunner.IsIdle && job.Assignee == null && job.CanPerformWith(this))
+        {
+            job.Assignee = this;
+            job.Start();
         }
     }
 }
