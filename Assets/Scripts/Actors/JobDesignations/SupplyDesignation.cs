@@ -11,7 +11,14 @@ public class SupplyDesignation : JobDesignation
 
     public override bool CanCreateJobs()
     {
-        return true;
+        foreach (ItemStack stack in supplyList.Items)
+        {
+            if (destination.Count(stack.Item) < stack.Quantity)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected override List<Job> CreateJobs()
