@@ -1,26 +1,52 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SupplyDesignation))]
 public class BuildDesignation : JobDesignation
 {
     [SerializeField]
     private Inventory itemSource;
 
     [SerializeField]
-    private SupplyDesignation supplyDesignation;
+    private Blueprint blueprint;
 
     [SerializeField]
-    private GameObject finishedBuildingPrefab;
+    private SpawnGameEvent spawnBuildingEvent;
+
+    private SupplyDesignation supplyDesignation;
 
     public override bool CanCreateJobs()
     {
-        // TODO: check inventory
-        return false;
+        foreach (ItemStack stack in blueprint.SupplyList.Items)
+        {
+            if (itemSource.Count(stack.Item) < stack.Quantity)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     protected override List<Job> CreateJobs()
     {
-        return new List<Job>();
+        return new List<Job>()
+        {
+            new BuildJob(this, blueprint.FinishedPrefab, spawnBuildingEvent)
+        };
+    }
+
+    private void Awake()
+    {
+        supplyDesignation = GetComponent<SupplyDesignation>();
+    }
+
+    private void OnEnable()
+    {
+        supplyDesignation.OnAllJobsCompleted.AddListener(DispatchJob);
+    }
+
+    private void OnDisable()
+    {
+        supplyDesignation.OnAllJobsCompleted.RemoveListener(DispatchJob);
     }
 }

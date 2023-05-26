@@ -8,6 +8,7 @@ public class SupplyDesignation : JobDesignation
 
     [SerializeField]
     private SupplyList supplyList;
+    public SupplyList SupplyList => supplyList;
 
     public override bool CanCreateJobs()
     {

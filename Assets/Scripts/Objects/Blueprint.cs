@@ -10,4 +10,8 @@ public class Blueprint : ScriptableObject
     [SerializeField]
     private GameObject constructionPrefab;
     public GameObject ConstructionPrefab => constructionPrefab;
+
+    [SerializeField]
+    private GameObject finishedPrefab;
+    public GameObject FinishedPrefab => finishedPrefab;
 }

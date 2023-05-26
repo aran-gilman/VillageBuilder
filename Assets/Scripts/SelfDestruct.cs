@@ -9,6 +9,11 @@ public class SelfDestruct : MonoBehaviour
     [SerializeField]
     private UnityEvent onBeingDestroyed;
 
+    public void DestroyNoEvent()
+    {
+        Destroy(gameObject);
+    }
+
     private void HandleDestroyEvent(object sender, GameObject toDestroy)
     {
         if (toDestroy == gameObject)
