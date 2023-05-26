@@ -1,21 +1,22 @@
 using UnityEngine;
 
-public class TransformProvider<T> : IProvider<Transform> where T : MonoBehaviour
+// We can't use the ComponentProvider because Transform doesn't inherit from MonoBehaviour
+public class TransformProvider<TIn> : IProvider<Transform> where TIn : MonoBehaviour
 {
-    public IProvider<T> TargetObject { get; private set; }
+    public IProvider<TIn> TargetObject { get; private set; }
 
-    public TransformProvider(IProvider<T> component)
+    public TransformProvider(IProvider<TIn> component)
     {
         TargetObject = component;
     }
 
     public Transform Get()
     {
-        T component = TargetObject.Get();
-        if (component == null)
+        TIn input = TargetObject.Get();
+        if (input == null)
         {
             return null;
         }
-        return component.transform;
+        return input.transform;
     }
 }

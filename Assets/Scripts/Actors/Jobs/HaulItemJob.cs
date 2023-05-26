@@ -30,7 +30,7 @@ public class HaulItemJob : Job
             new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(Source)),
             itemPickUpCommand,
             new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(Destination)),
-            new TransferItemsCommand(actorInventoryProvider, Destination, Item, cmd.TransferResult)
+            new TransferItemsCommand(actorInventoryProvider, Destination, Item, cmd.ActualQuantity)
         };
         return new CompositeCommand(commands);
     }

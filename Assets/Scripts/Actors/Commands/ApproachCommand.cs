@@ -7,7 +7,8 @@ public class ApproachCommand : ICommand
     public IProvider<Transform> Target { get; private set; }
     public float StopDistanceSqr { get; private set; }
 
-    private Transform cachedTarget;
+    private VariableProvider<Transform> cachedTarget = new VariableProvider<Transform>();
+    public IProvider<Transform> CachedTarget => cachedTarget;
 
     public ApproachCommand(NavMeshAgent actor, IProvider<Transform> target, float stopDistance = 1.0f)
     {
@@ -18,16 +19,16 @@ public class ApproachCommand : ICommand
 
     public void Init()
     {
-        cachedTarget = Target.Get();
+        cachedTarget.Value = Target.Get();
         if (cachedTarget != null)
         {
-            Actor.destination = cachedTarget.position;
+            Actor.destination = cachedTarget.Value.position;
         }
     }
 
     public ICommand.State Execute()
     {
-        if (cachedTarget == null)
+        if (cachedTarget.Value == null)
         {
             Actor.ResetPath();
             return ICommand.State.Invalid;
@@ -44,7 +45,6 @@ public class ApproachCommand : ICommand
 
     public void Cancel()
     {
-        cachedTarget = null;
         Actor.ResetPath();
     }
 }

@@ -25,18 +25,23 @@ public class SupplyJob : Job
     {
         IProvider<Inventory> actorInventoryProvider = new ConstProvider<Inventory>(actor.Inventory);
         IProvider<int> inventoryCount = new InventoryCountProvider(Destination, Item);
+
+        ApproachCommand approachSourceCommand = new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(Source));
         TransferItemsCommand cmd = new TransferItemsCommand(
-            Source,
+            new ComponentProvider<Inventory>(approachSourceCommand.CachedTarget),
             actorInventoryProvider,
             Item,
             new IntDifference(TargetQuantity, inventoryCount));
         itemPickUpCommand = cmd;
+
+        ApproachCommand approachDestinationCommand = new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(Destination));
+
         IEnumerable<ICommand> commands = new List<ICommand>
         {
-            new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(Source)),
+            approachSourceCommand,
             itemPickUpCommand,
-            new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(Destination)),
-            new TransferItemsCommand(actorInventoryProvider, new ConstProvider<Inventory>(Destination.Get()), Item, cmd.TransferResult)
+            approachDestinationCommand,
+            new TransferItemsCommand(actorInventoryProvider, new ComponentProvider<Inventory>(approachDestinationCommand.CachedTarget), cmd.ActualItem, cmd.ActualQuantity)
         };
         haulCommand = new CompositeCommand(commands);
         RepeatCommand repeated = new RepeatCommand(haulCommand, new IsEqualProvider<int>(inventoryCount, TargetQuantity));
