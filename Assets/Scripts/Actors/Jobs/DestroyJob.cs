@@ -23,7 +23,7 @@ public class DestroyJob : Job
     {
         IEnumerable<ICommand> commands = new List<ICommand>()
         {
-            new ApproachCommand(actor.NavMeshAgent, Owner.transform),
+            new ApproachCommand(actor.NavMeshAgent, new TransformPositionProvider<JobDesignation>(new ConstProvider<JobDesignation>(Owner))),
             new EventCommand<GameObjectGameEvent, GameObject>(destroyEvent, source.gameObject)
         };
         return new CompositeCommand(commands);
