@@ -32,9 +32,11 @@ public class HaulDesignation : JobDesignation
             return jobs;
         }
         IEnumerable<Item> distinctItems = Source.Inventory.ItemStacks.Select(stack => stack.Item).Distinct();
+        IProvider<RetrieveItemTarget> sourceProvider = new ConstProvider<RetrieveItemTarget>(source);
+        IProvider<DepositItemTarget> destinationProvider = new ConstProvider<DepositItemTarget>(destination);
         foreach (Item item in distinctItems)
         {
-            jobs.Add(new HaulItemJob(this, source, destination, item, new InventoryCountProvider(source.Inventory, item)));
+            jobs.Add(new HaulItemJob(this, sourceProvider, destinationProvider, new ConstProvider<Item>(item), new InventoryCountProvider(source.Inventory, item)));
         }
         return jobs;
     }

@@ -3,33 +3,34 @@ using System.Linq;
 
 public class HaulItemJob : Job
 {
-    public RetrieveItemTarget Source { get; private set; }
-    public DepositItemTarget Destination { get; private set; }
-    public Item Item { get; private set; }
+    public IProvider<RetrieveItemTarget> Source { get; private set; }
+    public IProvider<DepositItemTarget> Destination { get; private set; }
+    public IProvider<Item> Item { get; private set; }
     public IProvider<int> Quantity { get; private set; }
 
     private ICommand itemPickUpCommand;
 
-    public HaulItemJob(JobDesignation owner, RetrieveItemTarget source, DepositItemTarget destination, Item item, IProvider<int> quantity)
+    public HaulItemJob(JobDesignation owner, IProvider<RetrieveItemTarget> source, IProvider<DepositItemTarget> destination, IProvider<Item> item, IProvider<int> quantity)
     {
         Owner = owner;
         Source = source;
         Destination = destination;
         Item = item;
-        DisplayName = $"Haul {Item.name} from {Source.name} to {Destination.name}";
+        DisplayName = $"Haul item";
         Quantity = quantity;
     }
 
     public override CompositeCommand CreateCommand(ActorAI actor)
     {
-        TransferItemsCommand cmd = new TransferItemsCommand(Source.Inventory, actor.Inventory, Item, Quantity);
+        IProvider<Inventory> actorInventoryProvider = new ConstProvider<Inventory>(actor.Inventory);
+        TransferItemsCommand cmd = new TransferItemsCommand(new ConstProvider<Inventory>(Source.Get().Inventory), actorInventoryProvider, Item, Quantity);
         itemPickUpCommand = cmd;
         IEnumerable<ICommand> commands = new List<ICommand>
         {
-            new ApproachCommand(actor.NavMeshAgent, Source.transform),
+            new ApproachCommand(actor.NavMeshAgent, Source.Get().transform),
             itemPickUpCommand,
-            new ApproachCommand(actor.NavMeshAgent, Destination.transform),
-            new TransferItemsCommand(actor.Inventory, Destination.Inventory, Item, cmd.TransferResult)
+            new ApproachCommand(actor.NavMeshAgent, Destination.Get().transform),
+            new TransferItemsCommand(actorInventoryProvider, new ConstProvider<Inventory>(Destination.Get().Inventory), Item, cmd.TransferResult)
         };
         return new CompositeCommand(commands);
     }
@@ -41,19 +42,23 @@ public class HaulItemJob : Job
 
     public override bool IsValid()
     {
-        bool isValid = true;
-        isValid &= Source.gameObject.activeSelf;
-        isValid &= Destination.gameObject.activeSelf;
-        isValid &= Source.Inventory.Count(Item) > 0;
-        return isValid;
+        if (Item.Get() == null || Source.Get() == null || Destination.Get() == null)
+        {
+            return false;
+        }
+        if (!Source.Get().gameObject.activeSelf || !Destination.Get().gameObject.activeSelf)
+        {
+            return false;
+        }
+        return Source.Get().Inventory.Count(Item.Get()) > 0;
     }
 
     public override void Cancel()
     {
         base.Cancel();
-        if (command.CommandRunner.History.Contains(itemPickUpCommand))
+        if (Item.Get() != null && command.CommandRunner.History.Contains(itemPickUpCommand))
         {
-            Assignee.Inventory.Drop(Item, Assignee.transform);
+            Assignee.Inventory.Drop(Item.Get(), Assignee.transform);
         }
     }
 }
