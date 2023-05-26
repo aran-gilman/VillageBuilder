@@ -33,9 +33,9 @@ public class SupplyJob : Job
         itemPickUpCommand = cmd;
         IEnumerable<ICommand> commands = new List<ICommand>
         {
-            new ApproachCommand(actor.NavMeshAgent, new TransformPositionProvider<Inventory>(Source)),
+            new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(Source)),
             itemPickUpCommand,
-            new ApproachCommand(actor.NavMeshAgent, new TransformPositionProvider<Inventory>(Destination)),
+            new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(Destination)),
             new TransferItemsCommand(actorInventoryProvider, new ConstProvider<Inventory>(Destination.Get()), Item, cmd.TransferResult)
         };
         haulCommand = new CompositeCommand(commands);

@@ -4,10 +4,12 @@ using UnityEngine.AI;
 public class ApproachCommand : ICommand
 {
     public NavMeshAgent Actor { get; private set; }
-    public IProvider<Vector3> Target { get; private set; }
+    public IProvider<Transform> Target { get; private set; }
     public float StopDistanceSqr { get; private set; }
 
-    public ApproachCommand(NavMeshAgent actor, IProvider<Vector3> target, float stopDistance = 1.0f)
+    private Transform cachedTarget;
+
+    public ApproachCommand(NavMeshAgent actor, IProvider<Transform> target, float stopDistance = 1.0f)
     {
         Actor = actor;
         Target = target;
@@ -16,11 +18,21 @@ public class ApproachCommand : ICommand
 
     public void Init()
     {
-        Actor.destination = Target.Get();
+        cachedTarget = Target.Get();
+        if (cachedTarget != null)
+        {
+            Actor.destination = cachedTarget.position;
+        }
     }
 
     public ICommand.State Execute()
     {
+        if (cachedTarget == null)
+        {
+            Actor.ResetPath();
+            return ICommand.State.Invalid;
+        }
+
         Vector3 diff = Actor.destination - Actor.transform.position;
         if (diff.sqrMagnitude < StopDistanceSqr)
         {
@@ -32,6 +44,7 @@ public class ApproachCommand : ICommand
 
     public void Cancel()
     {
+        cachedTarget = null;
         Actor.ResetPath();
     }
 }

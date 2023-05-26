@@ -27,9 +27,9 @@ public class HaulItemJob : Job
         itemPickUpCommand = cmd;
         IEnumerable<ICommand> commands = new List<ICommand>
         {
-            new ApproachCommand(actor.NavMeshAgent, new TransformPositionProvider<Inventory>(Source)),
+            new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(Source)),
             itemPickUpCommand,
-            new ApproachCommand(actor.NavMeshAgent, new TransformPositionProvider<Inventory>(Destination)),
+            new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(Destination)),
             new TransferItemsCommand(actorInventoryProvider, Destination, Item, cmd.TransferResult)
         };
         return new CompositeCommand(commands);

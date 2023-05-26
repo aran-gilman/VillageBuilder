@@ -23,7 +23,7 @@ public class SupplyDesignation : JobDesignation
             IProvider<Item> itemProvider = new ConstProvider<Item>(stack.Item);
             jobs.Add(new SupplyJob(
                 this,
-                new NearestItemSource(new TransformPositionProvider<Inventory>(inventoryProvider), itemProvider),
+                new NearestItemSource(new TransformProvider<Inventory>(inventoryProvider), itemProvider),
                 inventoryProvider,
                 itemProvider,
                 new ConstProvider<int>(stack.Quantity)));
