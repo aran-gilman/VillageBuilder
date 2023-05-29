@@ -19,7 +19,7 @@ public abstract class JobDesignation : MonoBehaviour
     public abstract bool CanCreateJobs();
     protected abstract List<Job> CreateJobs();
 
-    public bool HasActiveJob()
+    public bool HasJob()
     {
         return currentJobs.Count > 0;
     }
