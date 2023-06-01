@@ -14,6 +14,7 @@ public abstract class PropertyTable<TKey, TValue> : ScriptableObject, ISerializa
     private List<Entry> serializedEntries;
 
     protected Dictionary<TKey, TValue> entries = new Dictionary<TKey, TValue>();
+    public IReadOnlyDictionary<TKey, TValue> Entries => entries;
 
     public TValue Get(TKey key)
     {

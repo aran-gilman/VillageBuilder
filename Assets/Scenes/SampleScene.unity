@@ -1387,6 +1387,7 @@ GameObject:
   - component: {fileID: 948117437}
   - component: {fileID: 948117438}
   - component: {fileID: 948117439}
+  - component: {fileID: 948117440}
   m_Layer: 0
   m_Name: Villager
   m_TagString: Untagged
@@ -1456,9 +1457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ec61091d6a530408ce5f23c341ea02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemStacks:
-  - Item: {fileID: 11400000, guid: cd0aa294ddc5ca3468de67604e716031, type: 2}
-    Quantity: 10
+  itemStacks: []
   onInit:
     m_PersistentCalls:
       m_Calls: []
@@ -1515,6 +1514,23 @@ MonoBehaviour:
   onBeingDestroyed:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &948117440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948117431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbccafa614a62a418d5c71b16241ea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayName: Eat Food
+  onAllJobsCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  restoreHungerProperty: {fileID: 11400000, guid: 7b28fcf8cc2d9cd4f90ca1dd0393d8f9, type: 2}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
