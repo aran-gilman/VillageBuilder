@@ -8,11 +8,13 @@ public class JobRunner : MonoBehaviour
     public CommandRunner CommandRunner { get; } = new CommandRunner();
     public NavMeshAgent NavMeshAgent { get; private set; }
     public Inventory Inventory { get; private set; }
+    public Motivator Motivator { get; private set; }
 
     private void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
         Inventory = GetComponent<Inventory>();
+        Motivator = GetComponent<Motivator>();
 
         CommandRunner.OnBecomeIdle += HandleBecomeIdle;
         JobDispatcher.Get().OnJobDispatched += HandleJobDispatched;

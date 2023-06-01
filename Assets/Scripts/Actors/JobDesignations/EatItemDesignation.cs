@@ -4,7 +4,10 @@ using UnityEngine;
 public class EatItemDesignation : JobDesignation
 {
     [SerializeField]
-    private ItemIntProperty restoreHungerProperty;
+    private ItemConsumer itemConsumer;
+
+    [SerializeField]
+    private Motive targetMotive;
 
     public override bool CanCreateJobs()
     {
@@ -15,7 +18,7 @@ public class EatItemDesignation : JobDesignation
     {
         return new List<Job>()
         {
-            new EatItemJob(this, restoreHungerProperty)
+            new EatItemJob(this, itemConsumer, targetMotive)
         };
     }
 }

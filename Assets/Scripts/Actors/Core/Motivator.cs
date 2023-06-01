@@ -30,7 +30,7 @@ public class Motivator : MonoBehaviour
             set
             {
                 float oldValue = currentValue;
-                currentValue = value;
+                currentValue = Mathf.Clamp(value, 0.0f, 100.0f);
                 foreach (Threshold threshold in Thresholds)
                 {
                     if (currentValue > threshold.MinValue && currentValue < threshold.MaxValue)
@@ -51,6 +51,15 @@ public class Motivator : MonoBehaviour
 
     [SerializeField]
     private List<MotiveInfo> motives;
+
+    public void ChangeMotiveValue(Motive motive, int amount)
+    {
+        MotiveInfo info = motives.Find(m => m.Motive == motive);
+        if (motive != null)
+        {
+            info.CurrentValue += amount;
+        }
+    }
 
     private void HandleSetEvent(object sender, MotiveChangeEvent.Args args)
     {
@@ -100,7 +109,7 @@ public class Motivator : MonoBehaviour
     {
         foreach (MotiveInfo motive in motives)
         {
-            motive.CurrentValue = Mathf.Clamp(motive.CurrentValue + motive.ChangePerSecond * Time.fixedDeltaTime, 0.0f, 100.0f);
+            motive.CurrentValue += motive.ChangePerSecond * Time.fixedDeltaTime;
         }
     }
 }

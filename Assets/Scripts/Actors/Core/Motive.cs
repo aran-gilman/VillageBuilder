@@ -9,5 +9,5 @@ public class Motive : ScriptableObject
 
     [SerializeField]
     private MotiveChangeEvent setEvent;
-    public MotiveChangeEvent SetEvent => SetEvent;
+    public MotiveChangeEvent SetEvent => setEvent;
 }

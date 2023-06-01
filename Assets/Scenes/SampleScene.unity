@@ -1458,7 +1458,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ec61091d6a530408ce5f23c341ea02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemStacks: []
+  itemStacks:
+  - Item: {fileID: 11400000, guid: cd0aa294ddc5ca3468de67604e716031, type: 2}
+    Quantity: 5
   onInit:
     m_PersistentCalls:
       m_Calls: []
@@ -1531,7 +1533,8 @@ MonoBehaviour:
   onAllJobsCompleted:
     m_PersistentCalls:
       m_Calls: []
-  restoreHungerProperty: {fileID: 11400000, guid: 7b28fcf8cc2d9cd4f90ca1dd0393d8f9, type: 2}
+  itemConsumer: {fileID: 11400000, guid: 9531a9c2dd2488f49bd54e8dd6511ce7, type: 2}
+  targetMotive: {fileID: 11400000, guid: 6b076f41610937c4898ed336a57db268, type: 2}
 --- !u!114 &948117441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,10 +1548,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motives:
-  - Name: Hunger
-    ChangePerSecond: 2
+  - Motive: {fileID: 11400000, guid: 6b076f41610937c4898ed336a57db268, type: 2}
+    ChangePerSecond: 0.5
     Thresholds:
-    - MinValue: 80
+    - MinValue: 51
       MaxValue: 100
       FromBelow:
         m_PersistentCalls:
