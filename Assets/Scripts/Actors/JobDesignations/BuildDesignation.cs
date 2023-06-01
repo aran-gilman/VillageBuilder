@@ -42,11 +42,19 @@ public class BuildDesignation : JobDesignation
 
     private void OnEnable()
     {
-        supplyDesignation.OnAllJobsCompleted.AddListener(DispatchJob);
+        supplyDesignation.OnAllJobsCompleted.AddListener(HandleSupplyJobCompletion);
     }
 
     private void OnDisable()
     {
-        supplyDesignation.OnAllJobsCompleted.RemoveListener(DispatchJob);
+        supplyDesignation.OnAllJobsCompleted.RemoveListener(HandleSupplyJobCompletion);
+    }
+
+    private void HandleSupplyJobCompletion()
+    {
+        if (CanCreateJobs())
+        {
+            DispatchJob();
+        }
     }
 }
