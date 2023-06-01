@@ -15,7 +15,7 @@ public abstract class Job
         Completed
     }
     public JobStatus Status { get; set; }
-    public ActorAI Assignee { get; set; }
+    public JobRunner Assignee { get; set; }
 
     public string DisplayName { get; protected set; }
     public JobDesignation Owner { get; protected set; }
@@ -30,8 +30,8 @@ public abstract class Job
     }
     public abstract ValidationResult IsValid();
 
-    public abstract bool CanPerformWith(ActorAI actor);
-    public abstract CompositeCommand CreateCommand(ActorAI actor);
+    public abstract bool CanPerformWith(JobRunner actor);
+    public abstract CompositeCommand CreateCommand(JobRunner actor);
 
     public void Start()
     {

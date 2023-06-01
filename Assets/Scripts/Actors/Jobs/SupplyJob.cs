@@ -21,7 +21,7 @@ public class SupplyJob : Job
         TargetQuantity = targetQuantity;
     }
 
-    public override CompositeCommand CreateCommand(ActorAI actor)
+    public override CompositeCommand CreateCommand(JobRunner actor)
     {
         IProvider<Inventory> actorInventoryProvider = new ConstProvider<Inventory>(actor.Inventory);
         IProvider<int> inventoryCount = new InventoryCountProvider(Destination, Item);
@@ -51,7 +51,7 @@ public class SupplyJob : Job
         return new CompositeCommand(new List<ICommand>() { repeated });
     }
 
-    public override bool CanPerformWith(ActorAI actor)
+    public override bool CanPerformWith(JobRunner actor)
     {
         return actor.NavMeshAgent != null && actor.Inventory != null;
     }

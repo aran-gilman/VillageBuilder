@@ -20,7 +20,7 @@ public class HaulItemJob : Job
         Quantity = quantity;
     }
 
-    public override CompositeCommand CreateCommand(ActorAI actor)
+    public override CompositeCommand CreateCommand(JobRunner actor)
     {
         IProvider<Inventory> actorInventoryProvider = new ConstProvider<Inventory>(actor.Inventory);
         TransferItemsCommand cmd = new TransferItemsCommand(Source, actorInventoryProvider, Item, Quantity);
@@ -35,7 +35,7 @@ public class HaulItemJob : Job
         return new CompositeCommand(commands);
     }
 
-    public override bool CanPerformWith(ActorAI actor)
+    public override bool CanPerformWith(JobRunner actor)
     {
         return actor.NavMeshAgent != null && actor.Inventory != null;
     }

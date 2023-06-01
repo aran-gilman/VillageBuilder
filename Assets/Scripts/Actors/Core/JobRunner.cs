@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class ActorAI : MonoBehaviour
+public class JobRunner : MonoBehaviour
 {
     public CommandRunner CommandRunner { get; } = new CommandRunner();
     public NavMeshAgent NavMeshAgent { get; private set; }
@@ -31,7 +31,7 @@ public class ActorAI : MonoBehaviour
 
     private void HandleBecomeIdle(object sender, object args)
     {
-        Job job = JobDispatcher.Get().OpenJobs.Where(j => j.CanPerformWith(this)).FirstOrDefault();
+        Job job = JobDispatcher.Get().GetAvailableJobs(this).FirstOrDefault();
         if (job != null)
         {
             job.Assignee = this;

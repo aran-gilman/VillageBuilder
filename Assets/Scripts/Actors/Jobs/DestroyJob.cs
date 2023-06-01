@@ -14,12 +14,12 @@ public class DestroyJob : Job
         DisplayName = $"Destroy {source.name}";
     }
 
-    public override bool CanPerformWith(ActorAI actor)
+    public override bool CanPerformWith(JobRunner actor)
     {
         return true;
     }
 
-    public override CompositeCommand CreateCommand(ActorAI actor)
+    public override CompositeCommand CreateCommand(JobRunner actor)
     {
         IEnumerable<ICommand> commands = new List<ICommand>()
         {

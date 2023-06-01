@@ -15,12 +15,12 @@ public class BuildJob : Job
         DisplayName = $"Build {source.name}";
     }
 
-    public override bool CanPerformWith(ActorAI actor)
+    public override bool CanPerformWith(JobRunner actor)
     {
         return true;
     }
 
-    public override CompositeCommand CreateCommand(ActorAI actor)
+    public override CompositeCommand CreateCommand(JobRunner actor)
     {
         IEnumerable<ICommand> commands = new List<ICommand>()
         {

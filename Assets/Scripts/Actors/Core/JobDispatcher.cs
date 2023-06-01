@@ -18,7 +18,12 @@ public class JobDispatcher
 
     private List<Job> allJobs = new List<Job>();
     public IEnumerable<Job> AllJobs => allJobs;
-    public IEnumerable<Job> OpenJobs => allJobs.Where(job => job.Status == Job.JobStatus.Available);
+    
+    // TODO: Sort by priority
+    public IEnumerable<Job> GetAvailableJobs(JobRunner actor)
+    {
+        return allJobs.Where(job => IsJobAvailableToActor(actor, job));
+    }
 
     public void DispatchJob(Job job)
     {
@@ -33,6 +38,19 @@ public class JobDispatcher
         Job job = (Job)sender;
         job.OnJobCompleted -= HandleJobCompleted;
         allJobs.Remove(job);
+    }
+
+    private bool IsJobAvailableToActor(JobRunner actor, Job job)
+    {
+        if (job.Status != Job.JobStatus.Available)
+        {
+            return false;
+        }
+        if (job.Assignee != null && job.Assignee != actor)
+        {
+            return false;
+        }
+        return job.CanPerformWith(actor);
     }
 
     private JobDispatcher() { }
