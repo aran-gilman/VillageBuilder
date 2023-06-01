@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SupplyDesignation : JobDesignation
@@ -9,6 +10,21 @@ public class SupplyDesignation : JobDesignation
     [SerializeField]
     private SupplyList supplyList;
     public SupplyList SupplyList => supplyList;
+
+    public void MaybeReactivateJob(ItemStack newStack)
+    {
+        foreach (ItemStack stack in supplyList.Items)
+        {
+            if (stack.Item == newStack.Item)
+            {
+                foreach (Job job in CurrentJobs.Where(j => j.Status == Job.JobStatus.Inactive))
+                {
+                    job.Status = Job.JobStatus.Available;
+                }
+                return;
+            }
+        }
+    }
 
     public override bool CanCreateJobs()
     {

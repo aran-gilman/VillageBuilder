@@ -787,9 +787,24 @@ MonoBehaviour:
   itemStacks:
   - Item: {fileID: 11400000, guid: 3c567829084531e4a9377de67b0fa27d, type: 2}
     Quantity: 5
-  onAdd:
+  onInit:
     m_PersistentCalls:
       m_Calls: []
+  onAdd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 967a85c70d4dcab468bb344b2a676edf, type: 2}
+        m_TargetAssemblyTypeName: GameEvent`1[[ItemStack, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onRemove:
     m_PersistentCalls:
       m_Calls: []
@@ -1185,6 +1200,9 @@ MonoBehaviour:
   itemStacks:
   - Item: {fileID: 11400000, guid: cd0aa294ddc5ca3468de67604e716031, type: 2}
     Quantity: 5
+  onInit:
+    m_PersistentCalls:
+      m_Calls: []
   onAdd:
     m_PersistentCalls:
       m_Calls: []
@@ -1441,6 +1459,9 @@ MonoBehaviour:
   itemStacks:
   - Item: {fileID: 11400000, guid: cd0aa294ddc5ca3468de67604e716031, type: 2}
     Quantity: 10
+  onInit:
+    m_PersistentCalls:
+      m_Calls: []
   onAdd:
     m_PersistentCalls:
       m_Calls: []
@@ -2101,9 +2122,24 @@ MonoBehaviour:
   itemStacks:
   - Item: {fileID: 11400000, guid: 3c567829084531e4a9377de67b0fa27d, type: 2}
     Quantity: 5
-  onAdd:
+  onInit:
     m_PersistentCalls:
       m_Calls: []
+  onAdd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 967a85c70d4dcab468bb344b2a676edf, type: 2}
+        m_TargetAssemblyTypeName: GameEvent`1[[ItemStack, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onRemove:
     m_PersistentCalls:
       m_Calls: []
@@ -2873,6 +2909,9 @@ MonoBehaviour:
   itemStacks:
   - Item: {fileID: 11400000, guid: c158c6c77d0e0494fbb56423c625f2c8, type: 2}
     Quantity: 10
+  onInit:
+    m_PersistentCalls:
+      m_Calls: []
   onAdd:
     m_PersistentCalls:
       m_Calls: []

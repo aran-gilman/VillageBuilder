@@ -9,6 +9,10 @@ public class Inventory : MonoBehaviour
     public IReadOnlyList<ItemStack> ItemStacks => itemStacks;
 
     [SerializeField]
+    private UnityEvent<ItemStack> onInit;
+    public UnityEvent<ItemStack> OnInit => onInit;
+
+    [SerializeField]
     private UnityEvent<ItemStack> onAdd;
     public UnityEvent<ItemStack> OnAdd => onAdd;
 
@@ -154,6 +158,14 @@ public class Inventory : MonoBehaviour
         if (quantity > 0)
         {
             item.SpawnPile(quantity, position.position, position.rotation);
+        }
+    }
+
+    public void OnEnable()
+    {
+        foreach (ItemStack stack in itemStacks)
+        {
+            onInit.Invoke(stack);
         }
     }
 }

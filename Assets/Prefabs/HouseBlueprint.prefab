@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7194548238641081084}
   - component: {fileID: 7194548238641081087}
   - component: {fileID: 7194548238641081086}
+  - component: {fileID: 8154121418982196779}
   m_Layer: 0
   m_Name: HouseBlueprint
   m_TagString: Untagged
@@ -51,6 +52,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemStacks: []
+  onInit:
+    m_PersistentCalls:
+      m_Calls: []
   onAdd:
     m_PersistentCalls:
       m_Calls: []
@@ -164,6 +168,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: House (Under Construction)
   shortDescription: A house. Eventually.
+--- !u!114 &8154121418982196779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7194548238641081078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26759c1f9f2757b43b01113e276227d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 967a85c70d4dcab468bb344b2a676edf, type: 2}
+  handleGameEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7194548238641081085}
+        m_TargetAssemblyTypeName: SupplyDesignation, Assembly-CSharp
+        m_MethodName: MaybeReactivateJob
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7194548239393460633
 GameObject:
   m_ObjectHideFlags: 0
