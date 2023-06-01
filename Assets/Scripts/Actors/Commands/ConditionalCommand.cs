@@ -24,5 +24,17 @@ public class ConditionalCommand : ICommand
     public void Init()
     {
         didExecute.Value = ShouldExecute.Get();
+        if (didExecute.Value)
+        {
+            Command.Init();
+        }
+    }
+
+    public void Cancel()
+    {
+        if (didExecute.Value)
+        {
+            Command.Cancel();
+        }
     }
 }

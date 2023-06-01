@@ -20,7 +20,13 @@ public class EatItemJob : Job
     {
         IProvider<Inventory> foodSource = new NearestItemWithProperty<ItemIntProperty, int>(new ConstProvider<Transform>(actor.transform), RestoreHungerProperty);
         ApproachCommand approachFoodSource = new ApproachCommand(actor.NavMeshAgent, new TransformProvider<Inventory>(foodSource));
-        return new CompositeCommand(new List<ICommand>() { approachFoodSource });
+
+        IProvider<Inventory> actorInventory = new ConstProvider<Inventory>(actor.Inventory);
+        ConditionalCommand maybeGetFood = new ConditionalCommand(
+            new Not(new InventoryContainsProperty<ItemIntProperty, int>(actorInventory, RestoreHungerProperty)),
+            approachFoodSource);
+
+        return new CompositeCommand(new List<ICommand>() { maybeGetFood });
     }
 
     public override ValidationResult IsValid()
