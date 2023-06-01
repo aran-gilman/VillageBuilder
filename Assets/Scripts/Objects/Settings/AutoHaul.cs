@@ -51,7 +51,7 @@ public class AutoHaul : ObjectSetting
         CurrentValue = !CurrentValue;
     }
 
-    private void HandleInventoryAdd(Item item, int quantity)
+    private void HandleInventoryAdd(ItemStack itemStack)
     {
         haulDesignation.DispatchJob();
     }

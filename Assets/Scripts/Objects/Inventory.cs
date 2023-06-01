@@ -9,12 +9,12 @@ public class Inventory : MonoBehaviour
     public IReadOnlyList<ItemStack> ItemStacks => itemStacks;
 
     [SerializeField]
-    private UnityEvent<Item, int> onAdd;
-    public UnityEvent<Item, int> OnAdd => onAdd;
+    private UnityEvent<ItemStack> onAdd;
+    public UnityEvent<ItemStack> OnAdd => onAdd;
 
     [SerializeField]
-    private UnityEvent<Item, int> onRemove;
-    public UnityEvent<Item, int> OnRemove => onRemove;
+    private UnityEvent<ItemStack> onRemove;
+    public UnityEvent<ItemStack> OnRemove => onRemove;
 
     [SerializeField]
     private UnityEvent onEmpty;
@@ -57,7 +57,11 @@ public class Inventory : MonoBehaviour
                 Quantity = quantity
             });
         }
-        onAdd.Invoke(item, quantity);
+        onAdd.Invoke(new ItemStack()
+        {
+            Item = item,
+            Quantity = quantity
+        });
         return quantity;
     }
 
@@ -92,13 +96,21 @@ public class Inventory : MonoBehaviour
 
                 if (remaining == 0)
                 {
-                    onRemove.Invoke(item, quantity);
+                    onRemove.Invoke(new ItemStack()
+                    {
+                        Item = item,
+                        Quantity = quantity
+                    });
                     return quantity;
                 }
             }
         }
         int removed = quantity - remaining;
-        onRemove.Invoke(item, removed);
+        onRemove.Invoke(new ItemStack()
+        {
+            Item = item,
+            Quantity = quantity
+        });
         return removed;
     }
     public int Remove(ItemStack toRemove) => Remove(toRemove.Item, toRemove.Quantity);
@@ -115,7 +127,11 @@ public class Inventory : MonoBehaviour
                 itemStacks.Remove(stack);
             }
         }
-        onRemove.Invoke(item, quantity);
+        onRemove.Invoke(new ItemStack()
+        {
+            Item = item,
+            Quantity = quantity
+        });
         if (itemStacks.Count == 0)
         {
             onEmpty.Invoke();
