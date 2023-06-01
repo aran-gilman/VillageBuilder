@@ -16,9 +16,9 @@ public class Motivator : MonoBehaviour
     }
 
     [Serializable]
-    public class Motive
+    public class MotiveInfo
     {
-        public string Name; // TODO: Probably replace with SO
+        public Motive Motive;
         public float ChangePerSecond; // TODO: Probably move this somewhere else
         public List<Threshold> Thresholds;
 
@@ -50,11 +50,55 @@ public class Motivator : MonoBehaviour
     }
 
     [SerializeField]
-    private List<Motive> motives;
+    private List<MotiveInfo> motives;
+
+    private void HandleSetEvent(object sender, MotiveChangeEvent.Args args)
+    {
+        if (args.Actor != this)
+        {
+            return;
+        }
+        MotiveInfo motive = motives.Find(m => m.Motive == args.Motive);
+        if (motive != null)
+        {
+            motive.CurrentValue = args.Amount;
+        }
+    }
+
+    private void HandleChangeEvent(object sender, MotiveChangeEvent.Args args)
+    {
+        if (args.Actor != this)
+        {
+            return;
+        }
+        MotiveInfo motive = motives.Find(m => m.Motive == args.Motive);
+        if (motive != null)
+        {
+            motive.CurrentValue += args.Amount;
+        }
+    }
+
+    private void OnEnable()
+    {
+        foreach (MotiveInfo motive in motives)
+        {
+            motive.Motive.ChangeEvent.OnGameEvent += HandleChangeEvent;
+            motive.Motive.SetEvent.OnGameEvent += HandleSetEvent;
+        }
+    }
+
+    private void OnDisable()
+    {
+        foreach (MotiveInfo motive in motives)
+        {
+            motive.Motive.ChangeEvent.OnGameEvent -= HandleChangeEvent;
+            motive.Motive.SetEvent.OnGameEvent -= HandleSetEvent;
+        }
+    }
 
     private void FixedUpdate()
     {
-        foreach (Motive motive in motives)
+        foreach (MotiveInfo motive in motives)
         {
             motive.CurrentValue = Mathf.Clamp(motive.CurrentValue + motive.ChangePerSecond * Time.fixedDeltaTime, 0.0f, 100.0f);
         }
