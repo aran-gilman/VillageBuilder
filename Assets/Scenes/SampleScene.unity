@@ -1954,6 +1954,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1114401363}
   - component: {fileID: 1114401364}
+  - component: {fileID: 1114401365}
   m_Layer: 0
   m_Name: Player Input
   m_TagString: Untagged
@@ -1989,6 +1990,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputEvents: {fileID: 11400000, guid: 635a4f08b15d91e459c552df8ad02d6a, type: 2}
+--- !u!114 &1114401365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114401362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058a53197a8986e4d8acc71017f212d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputEvents: {fileID: 11400000, guid: 2d1db8af8a82d7e488dd83fc5b7c41a4, type: 2}
 --- !u!1 &1282587161
 GameObject:
   m_ObjectHideFlags: 0
