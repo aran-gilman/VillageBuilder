@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfb1d4301cfaf624c8098084eacd4041, type: 3}
-  m_Name: WorldObjectSelectEvents
+  m_Script: {fileID: 11500000, guid: 9cb7fd7f09d71454b89a3c8980478ac5, type: 3}
+  m_Name: ViewMode
   m_EditorClassIdentifier: 
-  asset: {fileID: -944628639613478452, guid: 641a4e1210f44de41bb0b086b500a021, type: 3}
-  selectWorldObjectEvent: {fileID: 11400000, guid: 698322d7038f63040b0dbe628e0f81f3, type: 2}
+  inputEvents:
+  - {fileID: 11400000, guid: 635a4f08b15d91e459c552df8ad02d6a, type: 2}
+  - {fileID: 11400000, guid: 2d1db8af8a82d7e488dd83fc5b7c41a4, type: 2}
