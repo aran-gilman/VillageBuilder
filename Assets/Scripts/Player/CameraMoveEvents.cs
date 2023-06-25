@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 
 [CreateAssetMenu]
-public class InputEvents : ScriptableObject
+public class CameraMoveEvents : ScriptableObject
 {
     [SerializeField]
     private InputActionAsset asset;

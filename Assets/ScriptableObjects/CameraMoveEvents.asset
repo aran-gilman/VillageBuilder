@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0152e5393e5db2b4c96258c39ce5b998, type: 3}
-  m_Name: InputEvents
+  m_Name: CameraMoveEvents
   m_EditorClassIdentifier: 
   asset: {fileID: -944628639613478452, guid: 641a4e1210f44de41bb0b086b500a021, type: 3}
   rotateCameraEvent: {fileID: 11400000, guid: e5a55016c4a46424da297eb8ac21198a, type: 2}
