@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cb7fd7f09d71454b89a3c8980478ac5, type: 3}
-  m_Name: ViewMode
+  m_Name: BuildMode
   m_EditorClassIdentifier: 
   inputEvents:
   - {fileID: 11400000, guid: 635a4f08b15d91e459c552df8ad02d6a, type: 2}
-  - {fileID: 11400000, guid: 2d1db8af8a82d7e488dd83fc5b7c41a4, type: 2}
-  onEnterMode: {fileID: 11400000, guid: 72e8c690f166aaa4f8434ba2e883f438, type: 2}
-  onExitMode: {fileID: 11400000, guid: 61650ac72eaf3b04fa40901d25890209, type: 2}
+  onEnterMode: {fileID: 11400000, guid: 1a048f836a186914bad63a0ce4dde5ce, type: 2}
+  onExitMode: {fileID: 11400000, guid: 5209be1074086b3439f0e8c8bdf8d43a, type: 2}
