@@ -3,12 +3,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 
-[CreateAssetMenu]
-public class CameraMoveEvents : ScriptableObject
+[CreateAssetMenu(menuName = "Input Events/Camera Move")]
+public class CameraMoveEvents : InputEvents
 {
-    [SerializeField]
-    private InputActionAsset asset;
-
     [SerializeField]
     private FloatGameEvent rotateCameraEvent;
     [SerializeField]
@@ -37,7 +34,7 @@ public class CameraMoveEvents : ScriptableObject
 
     private InputAction pointAction;
 
-    public void Enable()
+    public override void Enable()
     {
         mainCamera = Camera.main;
 
@@ -52,7 +49,7 @@ public class CameraMoveEvents : ScriptableObject
         clickAction.performed += OnPlayerClick;
     }
 
-    public void Disable()
+    public override void Disable()
     {
         rotateCameraAction.performed -= OnRotateCamera;
         rotateCameraAction.canceled -= OnRotateCamera;

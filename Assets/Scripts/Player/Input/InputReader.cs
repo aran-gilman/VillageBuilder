@@ -3,7 +3,7 @@ using UnityEngine;
 public class InputReader : MonoBehaviour
 {
     [SerializeField]
-    private CameraMoveEvents inputEvents;
+    private InputEvents inputEvents;
 
     private void OnEnable()
     {
