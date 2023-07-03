@@ -323,7 +323,7 @@ GameObject:
   - component: {fileID: 171989848}
   - component: {fileID: 171989847}
   m_Layer: 5
-  m_Name: ModePanel
+  m_Name: ModeSelectPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
