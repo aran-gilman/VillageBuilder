@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Build Mode/Blueprint")]
 public class Blueprint : ScriptableObject
 {
     [SerializeField]
