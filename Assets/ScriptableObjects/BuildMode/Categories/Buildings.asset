@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15608e78d6e1a324c873996da577cf96, type: 3}
   m_Name: Buildings
   m_EditorClassIdentifier: 
-  displayName: 
+  displayName: Buildings

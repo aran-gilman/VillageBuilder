@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entries:
   - Blueprint: {fileID: 11400000, guid: 7b8b5255d0613b548bcb0b9bb90d1f58, type: 2}
+    Category: {fileID: 11400000, guid: 8c9ea187153645f4499aa636fa3a5173, type: 2}
     IsUnlocked: 1

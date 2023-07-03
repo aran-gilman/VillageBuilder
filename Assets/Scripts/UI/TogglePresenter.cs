@@ -20,6 +20,15 @@ public class TogglePresenter : MonoBehaviour
     private UnityEvent<bool> onClick;
     public UnityEvent<bool> OnClick => onClick;
 
+    [SerializeField]
+    private bool interactableByDefault;
+
+    public bool Interactable
+    {
+        get => button.interactable;
+        set => button.interactable = value;
+    }
+
     public bool IsOn
     {
         get => isOn;
@@ -66,6 +75,7 @@ public class TogglePresenter : MonoBehaviour
     {
         button = GetComponent<Button>();
         button.onClick.AddListener(HandleClick);
+        Interactable = interactableByDefault;
     }
 
     private void OnEnable()
