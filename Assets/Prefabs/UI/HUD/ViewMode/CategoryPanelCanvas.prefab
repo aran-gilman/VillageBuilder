@@ -52,6 +52,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildCatalog: {fileID: 11400000, guid: dd1a0abda83082d469741c8c61e6f4ed, type: 2}
   buttonPrefab: {fileID: 2851177662958658651, guid: d2d8dbe5ef3bd3c4d9125aa13415a196, type: 3}
+  onSelectCategory:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7648621926577363944
 MonoBehaviour:
   m_ObjectHideFlags: 0
