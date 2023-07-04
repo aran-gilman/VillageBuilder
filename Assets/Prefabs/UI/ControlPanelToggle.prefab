@@ -364,12 +364,10 @@ MonoBehaviour:
   labelDisplay: {fileID: 2851177662109346177}
   imageDisplay: {fileID: 5385986584235390949}
   toggleDisplay: {fileID: 2851177662240109858}
-  onTrue:
+  onClick:
     m_PersistentCalls:
       m_Calls: []
-  onFalse:
-    m_PersistentCalls:
-      m_Calls: []
+  interactableByDefault: 1
 --- !u!114 &7913818084614658505
 MonoBehaviour:
   m_ObjectHideFlags: 0
