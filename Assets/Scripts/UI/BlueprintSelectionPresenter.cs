@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -21,6 +22,46 @@ public class BlueprintSelectionPresenter : MonoBehaviour
         }
     }
 
+    private class BlueprintPresenter
+    {
+        public TogglePresenter Toggle { get; private set; }
+
+        private Blueprint blueprint;
+        public Blueprint Blueprint
+        {
+            get => blueprint;
+            set
+            {
+                blueprint = value;
+                UpdateDisplayedInfo();
+            }
+        }
+
+        public BlueprintPresenter(TogglePresenter toggle)
+        {
+            Toggle = toggle;
+            Toggle.OnClick.AddListener(HandleClick);
+        }
+
+        private void HandleClick(bool currentValue)
+        {
+            Debug.Log($"Selected blueprint: {blueprint.name}");
+        }
+
+        private void UpdateDisplayedInfo()
+        {
+            if (blueprint == null)
+            {
+                Toggle.gameObject.SetActive(false);
+            }
+            else
+            {
+                Toggle.SetLabel(blueprint.name);
+                Toggle.gameObject.SetActive(true);
+            }
+        }
+    }
+
     private List<BlueprintPresenter> children = new List<BlueprintPresenter>();
 
     private void UpdateButtons()
@@ -41,7 +82,7 @@ public class BlueprintSelectionPresenter : MonoBehaviour
                 BlueprintPresenter child;
                 if (i >= children.Count)
                 {
-                    child = Instantiate(buttonPrefab, transform).GetComponent<BlueprintPresenter>();
+                    child = new BlueprintPresenter(Instantiate(buttonPrefab, transform).GetComponent<TogglePresenter>());
                     children.Add(child);
                 }
                 else
