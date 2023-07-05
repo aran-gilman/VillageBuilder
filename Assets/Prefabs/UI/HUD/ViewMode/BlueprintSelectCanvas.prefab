@@ -217,3 +217,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildCatalog: {fileID: 11400000, guid: dd1a0abda83082d469741c8c61e6f4ed, type: 2}
   buttonPrefab: {fileID: 2851177662958658651, guid: d2d8dbe5ef3bd3c4d9125aa13415a196, type: 3}
+  onBlueprintSelected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 721a036c88c69ec41b9c50de4601fe10, type: 2}
+        m_TargetAssemblyTypeName: BuildModeState, Assembly-CSharp
+        m_MethodName: set_SelectedBlueprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: 28f28bdf312c97243bbc1b7d7547174f, type: 2}
+        m_TargetAssemblyTypeName: GameMode, Assembly-CSharp
+        m_MethodName: SetAsCurrent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

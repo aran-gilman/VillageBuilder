@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BlueprintSelectionPresenter : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class BlueprintSelectionPresenter : MonoBehaviour
 
     [SerializeField]
     private GameObject buttonPrefab;
+
+    [SerializeField]
+    private UnityEvent<Blueprint> onBlueprintSelected;
 
     private BuildCategory currentCategory;
     public BuildCategory CurrentCategory
@@ -25,6 +29,7 @@ public class BlueprintSelectionPresenter : MonoBehaviour
     private class BlueprintPresenter
     {
         public TogglePresenter Toggle { get; private set; }
+        public BlueprintSelectionPresenter Owner { get; private set; }
 
         private Blueprint blueprint;
         public Blueprint Blueprint
@@ -37,15 +42,16 @@ public class BlueprintSelectionPresenter : MonoBehaviour
             }
         }
 
-        public BlueprintPresenter(TogglePresenter toggle)
+        public BlueprintPresenter(TogglePresenter toggle, BlueprintSelectionPresenter owner)
         {
+            Owner = owner;
             Toggle = toggle;
             Toggle.OnClick.AddListener(HandleClick);
         }
 
         private void HandleClick(bool currentValue)
         {
-            Debug.Log($"Selected blueprint: {blueprint.name}");
+            Owner.onBlueprintSelected.Invoke(blueprint);
         }
 
         private void UpdateDisplayedInfo()
@@ -82,7 +88,7 @@ public class BlueprintSelectionPresenter : MonoBehaviour
                 BlueprintPresenter child;
                 if (i >= children.Count)
                 {
-                    child = new BlueprintPresenter(Instantiate(buttonPrefab, transform).GetComponent<TogglePresenter>());
+                    child = new BlueprintPresenter(Instantiate(buttonPrefab, transform).GetComponent<TogglePresenter>(), this);
                     children.Add(child);
                 }
                 else
