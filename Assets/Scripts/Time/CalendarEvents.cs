@@ -14,4 +14,8 @@ public class CalendarEvents : ScriptableObject
     [SerializeField]
     private IntGameEvent newYearEvent;
     public IntGameEvent NewYearEvent => newYearEvent;
+
+    [SerializeField]
+    private DateGameEvent newDateEvent;
+    public DateGameEvent NewDateEvent => newDateEvent;
 }

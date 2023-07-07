@@ -21,6 +21,8 @@ public class Calendar
     public int CurrentYear { get; private set; }
     public int TotalDaysInCurrentSeason { get => calendarConfig.Seasons[currentSeasonIndex].DaysPerSeason; }
 
+    public Date CurrentDate { get; private set; }
+
     private CalendarConfig calendarConfig;
     private CalendarEvents calendarEvents;
 
@@ -38,11 +40,15 @@ public class Calendar
                 if (currentSeasonIndex >= calendarConfig.Seasons.Length)
                 {
                     CurrentYear += 1;
+                    currentSeasonIndex = 0;
                     calendarEvents.NewYearEvent.Raise(CurrentYear);
                 }
                 calendarEvents.NewSeasonEvent.Raise(CurrentSeason);
             }
             calendarEvents.NewDayEvent.Raise(CurrentDayInSeason);
+
+            CurrentDate = new Date() { Day = CurrentDayInSeason, Season = CurrentSeason, Year = CurrentYear };
+            calendarEvents.NewDateEvent.Raise(CurrentDate);
         }
     }
 
@@ -73,6 +79,7 @@ public class Calendar
         CurrentYear = year;
         calendarConfig = config;
         calendarEvents = events;
+        CurrentDate = new Date() { Day = CurrentDayInSeason, Season = CurrentSeason, Year = CurrentYear };
     }
 
     private Calendar() { }

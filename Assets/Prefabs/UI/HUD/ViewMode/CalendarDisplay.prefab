@@ -120,6 +120,8 @@ GameObject:
   - component: {fileID: 2727001831611249883}
   - component: {fileID: 778985457901647872}
   - component: {fileID: 7520454629192451487}
+  - component: {fileID: 7046318406656029938}
+  - component: {fileID: 8107772250186433462}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -188,7 +190,48 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '{DAY} {SEASON} {Y}'
+  m_Text: '{0} {1} {2}'
+--- !u!114 &7046318406656029938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2626619266866191584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f281fcb25e054f438373402da37a644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 7520454629192451487}
+--- !u!114 &8107772250186433462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2626619266866191584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4783e16523ef38d4d835ab6e5ce6dcad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 20716ff04d4f4d64181b9f60ec4d9d27, type: 2}
+  handleGameEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7046318406656029938}
+        m_TargetAssemblyTypeName: CalendarPresenter, Assembly-CSharp
+        m_MethodName: DisplayDate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3858498362450345830
 GameObject:
   m_ObjectHideFlags: 0
