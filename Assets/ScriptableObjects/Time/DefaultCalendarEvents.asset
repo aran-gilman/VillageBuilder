@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9faafef0cc75faa40bcc55a88f09c4da, type: 3}
+  m_Name: DefaultCalendarEvents
+  m_EditorClassIdentifier: 
+  newDayEvent: {fileID: 11400000, guid: 460917ba995733248a3127041c2d4dc0, type: 2}
+  newSeasonEvent: {fileID: 11400000, guid: 63152c44778eb03419d9672224372fd0, type: 2}
+  newYearEvent: {fileID: 11400000, guid: 6bba6763a9678f94f9bd57e5971484a9, type: 2}

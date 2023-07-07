@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6189aa883e0f3f745872975c26dbc2a4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - newDayEvent: {fileID: 11400000, guid: 460917ba995733248a3127041c2d4dc0, type: 2}
+  - newSeasonEvent: {fileID: 11400000, guid: 63152c44778eb03419d9672224372fd0, type: 2}
+  - newYearEvent: {fileID: 11400000, guid: 6bba6763a9678f94f9bd57e5971484a9, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
