@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class ObjectSettingsPresenter : MonoBehaviour
 {
+    [SerializeField]
+    private VoidGameEvent refreshEvent;
+
     private GameObject source;
     public GameObject Source
     {
@@ -38,11 +41,25 @@ public class ObjectSettingsPresenter : MonoBehaviour
         ObjectSetting[] settings = Source.GetComponentsInChildren<ObjectSetting>();
         foreach (ObjectSetting setting in settings)
         {
-            setting.InstantiateControl(transform);
+            if (setting.IsEnabled())
+            {
+                setting.InstantiateControl(transform);
+            }
         }
     }
 
     private void OnEnable()
+    {
+        UpdateDisplay();
+        refreshEvent.OnGameEvent += HandleRefreshEvent;
+    }
+
+    private void OnDisable()
+    {
+        refreshEvent.OnGameEvent -= HandleRefreshEvent;
+    }
+
+    private void HandleRefreshEvent(object sender, object arg)
     {
         UpdateDisplay();
     }
