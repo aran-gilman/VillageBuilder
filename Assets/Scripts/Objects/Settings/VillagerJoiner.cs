@@ -8,6 +8,9 @@ public class VillagerJoiner : ObjectSetting
     [SerializeField]
     private IntGameEvent spawnVillagers;
 
+    [SerializeField]
+    private GameObject availabilityIndicator;
+
     public int AvailableVillagers
     {
         get => availableVillagers;
@@ -19,6 +22,7 @@ public class VillagerJoiner : ObjectSetting
             {
                 refreshSettings.Raise();
             }
+            availabilityIndicator.SetActive(availableVillagers > 0);
         }
     }
 
