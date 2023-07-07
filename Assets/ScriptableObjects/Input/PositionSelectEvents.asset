@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390af0ebf88fbcd469e9b299b4684e22, type: 3}
   m_Name: PositionSelectEvents
   m_EditorClassIdentifier: 
-  asset: {fileID: 0}
-  highlightPositionEvent: {fileID: 0}
-  selectPositionEvent: {fileID: 0}
+  asset: {fileID: -944628639613478452, guid: 641a4e1210f44de41bb0b086b500a021, type: 3}
+  highlightPositionEvent: {fileID: 11400000, guid: ac89ae2f880995c40927be12c37139ea, type: 2}
+  selectPositionEvent: {fileID: 11400000, guid: ea67a473a436a67408eedbf819ce7e2b, type: 2}
+  checkedLayers:
+    serializedVersion: 2
+    m_Bits: 64
