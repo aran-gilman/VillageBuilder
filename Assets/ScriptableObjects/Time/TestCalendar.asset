@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6189aa883e0f3f745872975c26dbc2a4, type: 3}
   m_Name: TestCalendar
   m_EditorClassIdentifier: 
-  secondsPerDay: 5
+  secondsPerDay: 1
   seasons:
   - Season: {fileID: 11400000, guid: 8cedfa12a976cbb4da79423d3027c4a6, type: 2}
     DaysPerSeason: 5
