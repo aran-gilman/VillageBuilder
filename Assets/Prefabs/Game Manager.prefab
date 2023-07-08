@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2702918449824686715}
   - component: {fileID: 2702918449824686716}
   - component: {fileID: 4880648817054982516}
+  - component: {fileID: 6457429674527169977}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -60,3 +61,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   calendarConfig: {fileID: 11400000, guid: 1ac358397ec669b42bfff1c913864287, type: 2}
   calendarEvents: {fileID: 11400000, guid: ba6089a842338c241972aacfd7abb756, type: 2}
+--- !u!114 &6457429674527169977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2702918449824686714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27cec58f641d48445851c4a90710c8e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 63152c44778eb03419d9672224372fd0, type: 2}
+  handleGameEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 45a23e69bc8e8964ebae4d235be1e23d, type: 2}
+        m_TargetAssemblyTypeName: ImmigrationService, Assembly-CSharp
+        m_MethodName: GenerateNewAvailableVillagers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
