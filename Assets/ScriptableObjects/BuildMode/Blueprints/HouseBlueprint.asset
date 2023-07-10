@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: HouseBlueprint
   m_EditorClassIdentifier: 
   supplyList: {fileID: 11400000, guid: 6f7eae9b0bdad814fa7e5aeb72a49dea, type: 2}
+  previewModel: {fileID: 5889258708471785710, guid: c9ad50356d5ce2540b415f1d581784dd, type: 3}
   constructionPrefab: {fileID: 7194548238641081078, guid: 9e1970cba8e9d4740a9b5470d7f27af6, type: 3}
   finishedPrefab: {fileID: 4831531455260725111, guid: 5ae573fa76ba2e34595dfde63c9b751a, type: 3}

@@ -8,6 +8,10 @@ public class Blueprint : ScriptableObject
     public SupplyList SupplyList => supplyList;
 
     [SerializeField]
+    private GameObject previewModel;
+    public GameObject PreviewModel => previewModel;
+
+    [SerializeField]
     private GameObject constructionPrefab;
     public GameObject ConstructionPrefab => constructionPrefab;
 
