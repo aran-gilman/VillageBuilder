@@ -15,6 +15,18 @@ public class TerrainBuilder : MonoBehaviour
     [SerializeField]
     private NavMeshSurface navMeshSurface;
 
+    public void UpdateNavMesh()
+    {
+        if (navMeshSurface.navMeshData == null)
+        {
+            navMeshSurface.BuildNavMesh();
+        }
+        else
+        {
+            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
+        }
+    }
+
     private void Awake()
     {
         BuildTerrain();
@@ -33,6 +45,6 @@ public class TerrainBuilder : MonoBehaviour
                 }
             }
         }
-        navMeshSurface.BuildNavMesh();
+        UpdateNavMesh();
     }
 }
