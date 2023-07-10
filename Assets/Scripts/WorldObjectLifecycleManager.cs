@@ -13,6 +13,13 @@ public class WorldObjectLifecycleManager : MonoBehaviour
     {
         Destroy(gameObject);
         onBeingDestroyed.Invoke();
-        destructionEvent.Raise(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (destructionEvent != null)
+        {
+            destructionEvent.Raise(gameObject);
+        }
     }
 }
