@@ -103,3 +103,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildModeState: {fileID: 11400000, guid: 721a036c88c69ec41b9c50de4601fe10, type: 2}
+  previewMaterial: {fileID: 2100000, guid: 6688e4ed43ed8454bb411982a32e6827, type: 2}
