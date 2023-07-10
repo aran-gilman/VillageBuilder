@@ -253,7 +253,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "MiddleClick",
+                    "name": "Mouse",
                     "id": "02b075df-e6ed-4cc5-b448-eb849e8a84d7",
                     "path": "OneModifier",
                     "interactions": "",
@@ -266,7 +266,7 @@
                 {
                     "name": "modifier",
                     "id": "07faedc7-e78a-4edd-9748-33e721491c4f",
-                    "path": "<Mouse>/middleButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
