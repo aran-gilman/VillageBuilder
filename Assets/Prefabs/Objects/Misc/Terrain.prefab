@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5369903753329474892}
   - component: {fileID: 6178064470997571136}
   - component: {fileID: 8103339047803721670}
+  - component: {fileID: 8320826015172196403}
   m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
@@ -53,7 +54,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -93,6 +94,37 @@ MonoBehaviour:
   mapSize: {x: 10, y: 1, z: 10}
   grid: {fileID: 6178064470997571136}
   navMeshSurface: {fileID: 5369903753329474892}
+--- !u!114 &8320826015172196403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5369903753329474894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36059aff6c45e27449054564cde20adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 058ee933c293b844e99fc11175f7d7cf, type: 2}
+  callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8103339047803721670}
+        m_TargetAssemblyTypeName: TerrainBuilder, Assembly-CSharp
+        m_MethodName: UpdateNavMesh
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  layers:
+    serializedVersion: 2
+    m_Bits: 192
 --- !u!1 &5369903753670596169
 GameObject:
   m_ObjectHideFlags: 0

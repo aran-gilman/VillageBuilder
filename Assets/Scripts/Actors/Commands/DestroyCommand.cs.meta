@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 7cc8306e8cc65b1459f145cdd9941d61
+guid: 9c5145ae18ea3404c8cc02f2f0e8bc8f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - destroyEvent: {fileID: 11400000, guid: 058ee933c293b844e99fc11175f7d7cf, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

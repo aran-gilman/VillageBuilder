@@ -1,11 +1,7 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class DestroyDesignation : JobDesignation
 {
-    [SerializeField]
-    private GameObjectGameEvent destroyEvent;
-
     public override bool CanCreateJobs()
     {
         return true;
@@ -15,7 +11,7 @@ public class DestroyDesignation : JobDesignation
     {
         return new List<Job>()
         {
-            new DestroyJob(this, destroyEvent)
+            new DestroyJob(this)
         };
     }
 }
