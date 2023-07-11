@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6169a587981ed74e91484cd6bb1eefd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultObject: {fileID: 8559273935540040093, guid: 8037a8748b1d09e46961a06f5fc7546d, type: 3}
+  defaultObject: {fileID: 5565129423597639169, guid: b101932333b600944b7e91aaeed4c55f, type: 3}
   mapSize: {x: 10, y: 1, z: 10}
   grid: {fileID: 6178064470997571136}
   navMeshSurface: {fileID: 5369903753329474892}
