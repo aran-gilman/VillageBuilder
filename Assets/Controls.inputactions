@@ -198,7 +198,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "QWER",
+                    "name": "Keyboard",
                     "id": "6bd7e8a6-6a77-4ad0-ac92-01ce90116a8b",
                     "path": "2DVector",
                     "interactions": "",
@@ -211,7 +211,7 @@
                 {
                     "name": "up",
                     "id": "c281d9ec-99d0-407e-868e-65720ab13452",
-                    "path": "<Keyboard>/x",
+                    "path": "<Keyboard>/period",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -222,7 +222,7 @@
                 {
                     "name": "down",
                     "id": "f9f8940a-bf8f-4f70-a626-4e7dfb0451fb",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/comma",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -233,7 +233,7 @@
                 {
                     "name": "left",
                     "id": "9b7d5ed3-8a52-4308-a1d7-d596217545ba",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -244,7 +244,7 @@
                 {
                     "name": "right",
                     "id": "b87cfc75-0b62-4b9c-9c60-165bc6c7f74a",
-                    "path": "<Keyboard>/q",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
