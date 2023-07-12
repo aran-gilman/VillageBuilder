@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class DisplayPreview : MonoBehaviour
 {
@@ -6,39 +8,98 @@ public class DisplayPreview : MonoBehaviour
     private BuildModeState buildModeState;
 
     [SerializeField]
-    private Material previewMaterial;
+    private Material placementAllowedMaterial;
 
-    private GameObject previewObject;
+    [SerializeField]
+    private Material placementForbiddenMaterial;
 
-    private void OnEnable()
+    [SerializeField]
+    private LayerMask blocksPlacementLayers;
+
+    private GameObject placementAllowedPreview;
+    private GameObject placementForbiddenPreview;
+
+    private List<Collider> currentlyColliding = new List<Collider>();
+
+    public void MaybePlaceObject(Vector3 position)
     {
-        // This should happen in OnDisable, but verify again in case of strangeness
-        if (previewObject != null)
+        if (currentlyColliding.Count == 0)
         {
-            Destroy(previewObject);
-        }
-        previewObject = Instantiate(buildModeState.SelectedBlueprint.PreviewModel, transform);
-        foreach (MeshRenderer renderer in previewObject.GetComponentsInChildren<MeshRenderer>())
-        {
-            renderer.materials = CreateMaterialArray(renderer.materials.Length);
+            buildModeState.PlaceSelectedBlueprint(position);
         }
     }
 
-    private void OnDisable()
+    private GameObject CreatePreviewObject(GameObject prefab, Material material)
     {
-        if (previewObject != null)
+        GameObject go = Instantiate(prefab, transform);
+        foreach (MeshRenderer renderer in go.GetComponentsInChildren<MeshRenderer>())
         {
-            Destroy(previewObject);
+            renderer.materials = CreateMaterialArray(renderer.materials.Length, material);
         }
+        return go;
     }
 
-    private Material[] CreateMaterialArray(int size)
+    private Material[] CreateMaterialArray(int size, Material material)
     {
         Material[] materials = new Material[size];
         for (int i = 0; i < size; i++)
         {
-            materials[i] = previewMaterial;
+            materials[i] = material;
         }
         return materials;
+    }
+
+    private void OnEnable()
+    {
+        // This should happen in OnDisable, but verify again in case of strangeness
+        if (placementAllowedPreview != null)
+        {
+            Destroy(placementAllowedPreview);
+        }
+        if (placementForbiddenPreview != null)
+        {
+            Destroy(placementForbiddenPreview);
+        }
+
+        placementAllowedPreview = CreatePreviewObject(buildModeState.SelectedBlueprint.ConstructionPrefab, placementAllowedMaterial);
+        placementForbiddenPreview = CreatePreviewObject(buildModeState.SelectedBlueprint.ConstructionPrefab, placementForbiddenMaterial);
+        placementForbiddenPreview.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        if (placementAllowedPreview != null)
+        {
+            Destroy(placementAllowedPreview);
+        }
+        if (placementForbiddenPreview != null)
+        {
+            Destroy(placementForbiddenPreview);
+        }
+        currentlyColliding.Clear();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        bool blocksPlacement = blocksPlacementLayers == (blocksPlacementLayers | (1 << other.gameObject.layer));
+        if (blocksPlacement)
+        {
+            if (!currentlyColliding.Contains(other))
+            {
+                currentlyColliding.Add(other);
+            }
+            placementAllowedPreview.gameObject.SetActive(false);
+            placementForbiddenPreview.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        currentlyColliding.Remove(other);
+        if (currentlyColliding.Count == 0)
+        {
+            placementAllowedPreview.gameObject.SetActive(true);
+            placementForbiddenPreview.gameObject.SetActive(false);
+        }
     }
 }
