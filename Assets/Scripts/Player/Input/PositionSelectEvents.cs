@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.UI;
-using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-using System;
-using UnityEngine.InputSystem.HID;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 [CreateAssetMenu(menuName = "Input Events/Position Select")]
 public class PositionSelectEvents : InputEvents
