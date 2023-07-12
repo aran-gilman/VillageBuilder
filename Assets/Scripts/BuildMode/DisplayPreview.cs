@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class DisplayPreview : MonoBehaviour
 {
@@ -16,17 +15,27 @@ public class DisplayPreview : MonoBehaviour
     [SerializeField]
     private LayerMask blocksPlacementLayers;
 
+    [SerializeField]
+    private float rotationSpeedMultiplier = 10.0f;
+
     private GameObject placementAllowedPreview;
     private GameObject placementForbiddenPreview;
 
     private List<Collider> currentlyColliding = new List<Collider>();
 
+    private float rotationAmount = 0;
+
     public void MaybePlaceObject(Vector3 position)
     {
         if (currentlyColliding.Count == 0)
         {
-            buildModeState.PlaceSelectedBlueprint(position);
+            buildModeState.PlaceSelectedBlueprint(position, transform.rotation);
         }
+    }
+
+    public void SetRotation(float rotation)
+    {
+        rotationAmount = rotation * rotationSpeedMultiplier;
     }
 
     private GameObject CreatePreviewObject(GameObject prefab, Material material)
@@ -47,6 +56,11 @@ public class DisplayPreview : MonoBehaviour
             materials[i] = material;
         }
         return materials;
+    }
+
+    private void FixedUpdate()
+    {
+        transform.Rotate(Vector3.up, rotationAmount * Time.fixedDeltaTime, Space.World);
     }
 
     private void OnEnable()

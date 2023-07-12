@@ -15,5 +15,6 @@ MonoBehaviour:
   inputEvents:
   - {fileID: 11400000, guid: 635a4f08b15d91e459c552df8ad02d6a, type: 2}
   - {fileID: 11400000, guid: ffd5d08efe610cc4098c6cc9f3593878, type: 2}
+  - {fileID: 11400000, guid: 333c79d1a17e69e4d87adcf1f4e8ded1, type: 2}
   onEnterMode: {fileID: 11400000, guid: 1a048f836a186914bad63a0ce4dde5ce, type: 2}
   onExitMode: {fileID: 11400000, guid: 5209be1074086b3439f0e8c8bdf8d43a, type: 2}
