@@ -75,8 +75,8 @@ public class DisplayPreview : MonoBehaviour
             Destroy(placementForbiddenPreview);
         }
 
-        placementAllowedPreview = CreatePreviewObject(buildModeState.SelectedBlueprint.ConstructionPrefab, placementAllowedMaterial);
-        placementForbiddenPreview = CreatePreviewObject(buildModeState.SelectedBlueprint.ConstructionPrefab, placementForbiddenMaterial);
+        placementAllowedPreview = CreatePreviewObject(buildModeState.SelectedBlueprint.PreviewModel, placementAllowedMaterial);
+        placementForbiddenPreview = CreatePreviewObject(buildModeState.SelectedBlueprint.PreviewModel, placementForbiddenMaterial);
         placementForbiddenPreview.SetActive(false);
     }
 
