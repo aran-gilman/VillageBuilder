@@ -23,8 +23,7 @@ public class TerrainBuilder : MonoBehaviour
         }
         else
         {
-            //navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
-            navMeshSurface.BuildNavMesh();
+            navMeshSurface.UpdateNavMesh(navMeshSurface.navMeshData);
         }
     }
 
