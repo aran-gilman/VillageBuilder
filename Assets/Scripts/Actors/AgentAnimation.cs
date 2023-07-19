@@ -16,9 +16,5 @@ public class AgentAnimation : MonoBehaviour
     {
         float speed = navMeshAgent.velocity.magnitude * movementMultiplier;
         animator.SetFloat("MovementSpeed", speed);
-        if (speed > 0)
-        {
-            Debug.Log(speed);
-        }
     }
 }
