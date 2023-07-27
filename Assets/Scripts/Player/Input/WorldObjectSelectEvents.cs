@@ -37,7 +37,12 @@ public class WorldObjectSelectEvents : InputEvents
         Vector2 screenPos = pointAction.ReadValue<Vector2>();
         if (Physics.Raycast(mainCamera.ScreenPointToRay(screenPos), out RaycastHit hit, Mathf.Infinity, -1, QueryTriggerInteraction.Collide))
         {
-            selectWorldObjectEvent.Raise(hit.collider.gameObject);
+            // TODO: Consider adding a separate way to determine selectability
+            BasicInfoBox selectable = hit.collider.gameObject.GetComponentInParent<BasicInfoBox>();
+            if (selectable != null)
+            {
+                selectWorldObjectEvent.Raise(selectable.gameObject);
+            }
         }
     }
 
